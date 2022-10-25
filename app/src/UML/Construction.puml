@@ -2,6 +2,8 @@
 'https://plantuml.com/class-diagram
 class Batiment{
 String nomBat
+ajouterPiece(Piece piece)
+getNbPieces()
 }
 
 class Piece {
