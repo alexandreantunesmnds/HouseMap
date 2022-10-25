@@ -9,6 +9,12 @@ public class Piece {
         noPiece = 0;
     }
 
+    public Piece(String nom, int noPiece, Mur[] tabMur) {
+        this.nom = nom;
+        this.noPiece = noPiece;
+        this.tabMur = tabMur;
+    }
+
     public String getNom() {
         return nom;
     }
