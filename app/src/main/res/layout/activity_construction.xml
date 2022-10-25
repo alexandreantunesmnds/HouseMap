@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ConstructionActivity">
+
+    <Button
+            android:text="@string/ajouter_une_pi_ce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button"
+            android:onClick="clickAjoutPiece"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="220dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="112dp" android:layout_marginEnd="112dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+            android:text="@string/consulter_les_pieces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="clickConsultPiece"
+            android:layout_marginTop="325dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="99dp" android:layout_marginEnd="100dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
