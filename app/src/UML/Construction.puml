@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Piece {
+String nomPiece
+ImageView photo1
+ImageView photo2
+ImageView photo3
+ImageView photo4
+Piece [] zonesPieces
+getZonesPieces()
+}
+class MainActivity{
+Button Construction
+Button Simulation
+onCreate()
+}
+
+@enduml
