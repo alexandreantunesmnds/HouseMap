@@ -9,6 +9,11 @@ public class Mur {
         noMur = 0;
     }
 
+    public Mur(int noMur, ImageView photo) {
+        this.noMur = noMur;
+        this.photo = photo;
+    }
+
     public int getNoPiece() {
         return noMur;
     }
