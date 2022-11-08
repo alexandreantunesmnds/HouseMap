@@ -5,6 +5,10 @@ String nomBat
 ajouterPiece(Piece piece)
 getNbPieces()
 }
+class Monde{
+ajouterBatiment()
+getBatiment()
+}
 
 class Piece {
 String nomPiece
@@ -27,7 +31,7 @@ ImageView photo
 'Button Simulation
 'onCreate()
 '}
-
+Monde--"*"Batiment
 Batiment--"*"Piece
 Piece--"4"Mur
 Sortie -- "1" Piece

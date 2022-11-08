@@ -80,7 +80,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if(nbPrises==3){
+            if(nbPrises==4){
+                Piece salleinfo = new Piece("Salle info",1,tabMur);
+                Batiment batiment = new Batiment();
                 Intent intent = new Intent(this, ConstructionActivity.class) ;
                 startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
