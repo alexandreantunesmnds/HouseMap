@@ -53,10 +53,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
 
             }*/
         }
-        if(nbPrises==3){
-            Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
-        }
-        piece = new Piece("cuisine", 1, tabMur);
         maison.ajouterPiece(piece);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -83,6 +79,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 fos.flush();
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+            if(nbPrises==3){
+                Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
     }
