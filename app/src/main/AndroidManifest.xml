@@ -14,7 +14,7 @@
         android:theme="@style/Theme.HouseMap"
         tools:targetApi="31" >
         <activity
-            android:name=".PIeceEnCoursActivity"
+            android:name=".PieceEnCoursActivity"
             android:exported="false" />
         <activity
             android:name=".ConsultPieceActvity"

@@ -4,4 +4,6 @@
     <string name="visualisation">Visualisation</string>
     <string name="consulter_les_pieces">Consulter les pieces</string>
     <string name="ajouter_une_pi_ce">Ajouter une pièce</string>
+    <string name="ajout_mur">Ajout mur</string>
+    <string name="annuler">Annuler</string>
 </resources>
