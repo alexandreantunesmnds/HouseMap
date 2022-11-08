@@ -1,4 +1,4 @@
-package com.example.housemap;
+package com.example.housemap.model;
 
 import android.widget.ImageView;
 

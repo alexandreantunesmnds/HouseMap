@@ -1,4 +1,4 @@
-package com.example.housemap;
+package com.example.housemap.model;
 
 public class Piece {
     private String nom;

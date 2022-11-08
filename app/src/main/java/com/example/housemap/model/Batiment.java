@@ -1,4 +1,4 @@
-package com.example.housemap;
+package com.example.housemap.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,11 @@ public class Batiment {
         nomBat = "Batiment 1";
         listPieces = new ArrayList<>(10);
     }
-    private void ajouterPiece(Piece piece){
+    public void ajouterPiece(Piece piece){
         listPieces.add(piece);
     }
 
-    private int getNbPieces(Piece piece){
+    public int getNbPieces(Piece piece){
         return listPieces.size();
     }
 }
