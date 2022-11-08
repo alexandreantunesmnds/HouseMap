@@ -81,6 +81,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==3){
+                Intent intent = new Intent(this, ConstructionActivity.class) ;
+                startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
