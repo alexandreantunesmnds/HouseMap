@@ -53,7 +53,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
 
             }*/
         }
-        maison.ajouterPiece(piece);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -83,6 +82,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             if(nbPrises==4){
                 Piece salleinfo = new Piece("Salle info",1,tabMur);
                 Batiment batiment = new Batiment();
+                batiment.ajouterPiece(salleinfo);
                 Intent intent = new Intent(this, ConstructionActivity.class) ;
                 startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
