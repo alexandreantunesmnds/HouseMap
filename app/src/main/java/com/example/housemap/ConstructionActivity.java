@@ -36,6 +36,7 @@ public class ConstructionActivity extends AppCompatActivity {
 
     @SuppressLint("QueryPermissionsNeeded")
     public void clickAjoutPiece(View view) {
+        Toast.makeText(ConstructionActivity.this, "Nb prises: "+ nbPrises, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(intent, PHOTO);
@@ -65,7 +66,6 @@ public class ConstructionActivity extends AppCompatActivity {
         if (requestCode == PHOTO && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            Toast.makeText(ConstructionActivity.this, "Hauteur de l'image prise : "+ imageBitmap.getHeight(), Toast.LENGTH_SHORT).show();
             FileOutputStream fos;
             FileInputStream fis;
             try {
