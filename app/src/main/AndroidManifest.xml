@@ -23,7 +23,7 @@
                 android:name=".ConsultPieceActvity"
                 android:exported="false"/>
         <activity
-                android:name=".AjouterPIeceActivity"
+                android:name=".AjouterPieceActivity"
                 android:exported="false"/>
         <activity
                 android:name=".ConstructionActivity"

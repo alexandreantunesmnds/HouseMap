@@ -1,8 +1,10 @@
 package com.example.housemap;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +15,14 @@ import android.os.Bundle;
 import com.example.housemap.model.Batiment;
 import com.example.housemap.model.Mur;
 import com.example.housemap.model.Piece;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 public class PieceEnCoursActivity extends AppCompatActivity {
+    private  Context context;
     private final int PHOTO = 1;
     private int nbPrises;
     private Mur[] tabMur = new Mur[4];
@@ -55,6 +58,23 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             }*/
         }
     }
+    public void sauvegarder() throws IOException {
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("nom", piece.getNom());
+            json.put("murs", List.of(tabMur));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // Convert JsonObject to String Format
+        String userString = json.toString();
+        File file = new File(context.getFilesDir(),"piecesauve");
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(userString);
+        bufferedWriter.close();
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO && resultCode == RESULT_OK) {
@@ -82,12 +102,17 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                for (Mur mur : tabMur) {
+                /*for (Mur mur : tabMur) {
                     Log.i("Nom image piece :", (String) mur.getPhoto().getTag()); //Affichage correct du nom des images
-                }
-                Piece salleinfo = new Piece("Salle info",1,tabMur);
+                }*/
+                piece = new Piece("Salle info",1,tabMur);
                 Batiment batiment = new Batiment();
-                batiment.ajouterPiece(salleinfo);
+                batiment.ajouterPiece(piece);
+                try {
+                    this.sauvegarder();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 Intent intent = new Intent(this, ConstructionActivity.class) ;
                 startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
