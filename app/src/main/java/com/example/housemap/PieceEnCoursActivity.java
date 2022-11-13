@@ -22,7 +22,7 @@ import java.io.*;
 import java.util.List;
 
 public class PieceEnCoursActivity extends AppCompatActivity {
-    private  Context context;
+    private static final String FILE_NAME="sauvfile";
     private final int PHOTO = 1;
     private int nbPrises;
     private Mur[] tabMur = new Mur[4];
@@ -63,17 +63,28 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
         try {
             json.put("nom", piece.getNom());
-            json.put("murs", List.of(tabMur));
+            json.put("murs", List.of(tabMur).get(1).;
         } catch (JSONException e) {
             e.printStackTrace();
         }
         // Convert JsonObject to String Format
         String userString = json.toString();
-        File file = new File(context.getFilesDir(),"piecesauve");
-        FileWriter fileWriter = new FileWriter(file);
+        File file = new File(this.getFilesDir(),FILE_NAME);
+        FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(userString);
         bufferedWriter.close();
+
+        StringBuffer output = new StringBuffer();
+        FileReader fileReader = new FileReader(file.getAbsoluteFile());
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            output.append(line + "\n");
+        }
+        String response = output.toString();
+        bufferedReader.close();
+        Log.i("lecture sauv", response);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
