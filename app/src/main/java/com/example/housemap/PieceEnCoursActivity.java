@@ -82,8 +82,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                for(int i=0;i<tabMur.length;i++){
-                    Log.i("Nom image piece :", (String) tabMur[i].getPhoto().getTag()); //Affichage correct du nom des images
+                for (Mur mur : tabMur) {
+                    Log.i("Nom image piece :", (String) mur.getPhoto().getTag()); //Affichage correct du nom des images
                 }
                 Piece salleinfo = new Piece("Salle info",1,tabMur);
                 Batiment batiment = new Batiment();
