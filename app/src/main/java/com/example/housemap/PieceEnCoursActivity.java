@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -67,6 +68,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 fis = openFileInput("image"+nbPrises+".data");
                 Bitmap bm = BitmapFactory.decodeStream(fis);
                 img.setImageBitmap(bm);
+                img.setTag("image"+nbPrises);
                 Mur mur = new Mur(nbPrises,img);
                 tabMur[nbPrises]=mur;
                 nbPrises++;
@@ -80,6 +82,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
+                for(int i=0;i<tabMur.length;i++){
+                    Log.i("Nom image piece :", (String) tabMur[i].getPhoto().getTag()); //Affichage correct du nom des images
+                }
                 Piece salleinfo = new Piece("Salle info",1,tabMur);
                 Batiment batiment = new Batiment();
                 batiment.ajouterPiece(salleinfo);
