@@ -61,9 +61,16 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void sauvegarder() throws IOException {
 
         JSONObject json = new JSONObject();
+        String mur1 = (String) tabMur[0].getPhoto().getTag();
+        String mur2 = (String) tabMur[1].getPhoto().getTag();
+        String mur3 = (String) tabMur[2].getPhoto().getTag();
+        String mur4 = (String) tabMur[3].getPhoto().getTag();
         try {
             json.put("nom", piece.getNom());
-            json.put("murs", tabMur[0].getPhoto().getTag());
+            json.put("mur1", mur1 );
+            json.put("mur2", mur2 );
+            json.put("mur3", mur3 );
+            json.put("mur4", mur4 );
         } catch (JSONException e) {
             e.printStackTrace();
         }
