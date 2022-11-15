@@ -63,7 +63,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
         try {
             json.put("nom", piece.getNom());
-            json.put("murs", List.of(tabMur).get(1).;
+            json.put("murs", tabMur[0].getPhoto().getTag());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -74,17 +74,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(userString);
         bufferedWriter.close();
-
-        StringBuffer output = new StringBuffer();
-        FileReader fileReader = new FileReader(file.getAbsoluteFile());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            output.append(line + "\n");
-        }
-        String response = output.toString();
-        bufferedReader.close();
-        Log.i("lecture sauv", response);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
