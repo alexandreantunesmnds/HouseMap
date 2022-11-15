@@ -7,11 +7,17 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.housemap.model.Batiment;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 
 public class ConsultPieceActvity extends AppCompatActivity {
     private static final String FILE_NAME="sauvfile";
+    private String mur1;
+    private String mur2;
+    private String mur3;
+    private String mur4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +26,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
 
 
         StringBuffer output = new StringBuffer();
-        File file = new File(this.getFilesDir(),FILE_NAME);
+        File file = new File(this.getFilesDir(), FILE_NAME);
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(file.getAbsoluteFile());
@@ -43,26 +49,44 @@ public class ConsultPieceActvity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Log.i("lecture sauv", response);
+        //Log.i("lecture sauv", response);
+
+        try {
+            JSONObject pieceObject = new JSONObject(response);
+            mur1 = pieceObject.get("mur1").toString();
+            mur2 = pieceObject.get("mur2").toString();
+            mur3 = pieceObject.get("mur3").toString();
+            mur4 = pieceObject.get("mur4").toString();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
 
         FileInputStream fis = null;
         FileInputStream fis2 = null;
+        FileInputStream fis3 = null;
+        FileInputStream fis4 = null;
         try {
-            fis = openFileInput("image0.data");
-            fis2 = openFileInput("image1.data");
+            fis = openFileInput(mur1);
+            fis2 = openFileInput(mur2);
+            fis3 = openFileInput(mur3);
+            fis4 = openFileInput(mur4);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         Bitmap bm = BitmapFactory.decodeStream(fis);
         Bitmap bm2 = BitmapFactory.decodeStream(fis2);
+        Bitmap bm3 = BitmapFactory.decodeStream(fis3);
+        Bitmap bm4 = BitmapFactory.decodeStream(fis4);
         ImageView img = findViewById(R.id.img_piece);
         ImageView img2 = findViewById(R.id.img_piece2);
         ImageView img3 = findViewById(R.id.img_piece3);
-        ImageView img4 = findViewById(R.id.img_piece3);
+        ImageView img4 = findViewById(R.id.img_piece4);
         // Reste à mettre bm à mettre sur l’ImageView
         img.setImageBitmap(bm);
-        img.setImageBitmap(bm2);
+        img2.setImageBitmap(bm2);
+        img3.setImageBitmap(bm3);
+        img4.setImageBitmap(bm4);
 
     }
 }

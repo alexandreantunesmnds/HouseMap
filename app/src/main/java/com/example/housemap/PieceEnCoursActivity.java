@@ -95,7 +95,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 fis = openFileInput("image"+nbPrises+".data");
                 Bitmap bm = BitmapFactory.decodeStream(fis);
                 img.setImageBitmap(bm);
-                img.setTag("image"+nbPrises);
+                img.setTag("image"+nbPrises+".data");
                 Mur mur = new Mur(nbPrises,img);
                 tabMur[nbPrises]=mur;
                 nbPrises++;
