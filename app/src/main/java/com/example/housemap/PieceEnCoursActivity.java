@@ -29,6 +29,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private Mur[] tabMur = new Mur[4];
     private Piece piece;
     private Batiment maison;
+    private String nomPieceS;
     private EditText nomPiece;
 
     @Override
@@ -128,6 +129,16 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void clickValiderNom(View view) {
+        if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
+            nomPieceS = nomPiece.getText().toString();
+            Toast.makeText(PieceEnCoursActivity.this, "Votre pièce s'appelle : "+nomPieceS, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -35,6 +35,7 @@
             android:hint="@string/nom_de_pi_ce"/>
     <Button
             android:text="@string/valider"
+            android:onClick="clickValiderNom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button4"
             android:layout_marginStart="28dp" app:layout_constraintStart_toEndOf="@+id/editTextTextNamePiece"
