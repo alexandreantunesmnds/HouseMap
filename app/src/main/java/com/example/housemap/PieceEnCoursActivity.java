@@ -38,7 +38,11 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_piece_en_cours);
         Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         nomPiece = findViewById(R.id.editTextTextNamePiece);
-        maison = new Batiment();
+        if(getIntent().getExtras() != null) {
+            maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+            Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     public void clickAjoutMur(View view) {
@@ -117,9 +121,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 /*for (Mur mur : tabMur) {
                     Log.i("Nom image piece :", (String) mur.getPhoto().getTag()); //Affichage correct du nom des images
                 }*/
-                piece = new Piece("Salle info",1,tabMur);
-                Batiment batiment = new Batiment();
-                batiment.ajouterPiece(piece);
                 try {
                     this.sauvegarder();
                 } catch (IOException e) {
@@ -135,7 +136,10 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             nomPieceS = nomPiece.getText().toString();
-            Toast.makeText(PieceEnCoursActivity.this, "Votre pièce s'appelle : "+nomPieceS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce s'appelle : "+nomPieceS, Toast.LENGTH_SHORT).show();
+            piece = new Piece(nomPieceS,1); //TODO:revoirlesnumpieces
+            maison.ajouterPiece(piece);
+            Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();

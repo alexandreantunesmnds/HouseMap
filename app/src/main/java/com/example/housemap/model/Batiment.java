@@ -1,9 +1,10 @@
 package com.example.housemap.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Batiment {
+public class Batiment implements Serializable {
     private String nomBat;
     private List<Piece> listPieces;
     public Batiment() {
@@ -14,7 +15,7 @@ public class Batiment {
         listPieces.add(piece);
     }
 
-    public int getNbPieces(Piece piece){
+    public int getNbPieces(){
         return listPieces.size();
     }
 }

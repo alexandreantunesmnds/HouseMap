@@ -1,6 +1,8 @@
 package com.example.housemap.model;
 
-public class Piece {
+import java.io.Serializable;
+
+public class Piece implements Serializable {
     private String nom;
     private int noPiece;
     private Mur [] tabMur = new Mur[4];
@@ -9,7 +11,7 @@ public class Piece {
         noPiece = 0;
     }
 
-    public Piece(String nom, int noPiece, Mur[] tabMur) {
+    public Piece(String nom, int noPiece) {
         this.nom = nom;
         this.noPiece = noPiece;
         this.tabMur = tabMur;

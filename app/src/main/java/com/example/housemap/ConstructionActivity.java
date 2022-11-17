@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ConstructionActivity extends AppCompatActivity {
+    private Batiment maison;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,11 @@ public class ConstructionActivity extends AppCompatActivity {
 
     @SuppressLint("QueryPermissionsNeeded")
     public void clickAjoutPiece(View view) {
-        Intent intent = new Intent(this, PieceEnCoursActivity.class) ;
+        if(getIntent().getExtras() != null) {
+            maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+        }
+        Intent intent = new Intent(ConstructionActivity.this, PieceEnCoursActivity.class) ;
+        intent.putExtra("maison", maison); //where user is an instance of User object
         startActivity(intent) ;
     }
 

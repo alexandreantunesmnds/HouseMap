@@ -2,7 +2,9 @@ package com.example.housemap.model;
 
 import android.widget.ImageView;
 
-public class Mur {
+import java.io.Serializable;
+
+public class Mur implements Serializable {
     private int noMur;
     private ImageView photo;
     public Mur() {
