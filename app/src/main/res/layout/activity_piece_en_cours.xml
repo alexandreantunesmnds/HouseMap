@@ -24,13 +24,19 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="73dp"
             app:layout_constraintTop_toBottomOf="@+id/button3"/>
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="225dp"
+            android:layout_height="52dp"
             android:inputType="textPersonName"
-            android:text="@string/nom_de_pi_ce"
             android:ems="10"
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextTextNamePiece"
             android:minHeight="48dp" android:autofillHints="" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="125dp"/>
+            app:layout_constraintHorizontal_bias="0.164" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="120dp" android:textSize="16sp"
+            android:hint="@string/nom_de_pi_ce"/>
+    <Button
+            android:text="@string/valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button4"
+            android:layout_marginStart="28dp" app:layout_constraintStart_toEndOf="@+id/editTextTextNamePiece"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="120dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

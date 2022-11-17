@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,12 +29,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private Mur[] tabMur = new Mur[4];
     private Piece piece;
     private Batiment maison;
+    private EditText nomPiece;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piece_en_cours);
         Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
+        nomPiece = findViewById(R.id.editTextTextNamePiece);
         maison = new Batiment();
     }
 
