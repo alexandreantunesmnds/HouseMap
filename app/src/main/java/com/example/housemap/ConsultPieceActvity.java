@@ -25,6 +25,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
         setContentView(R.layout.activity_consult_piece_actvity);
 
 
+
         StringBuffer output = new StringBuffer();
         File file = new File(this.getFilesDir(), FILE_NAME);
         FileReader fileReader = null;

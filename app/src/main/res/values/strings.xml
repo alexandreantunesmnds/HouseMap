@@ -6,4 +6,5 @@
     <string name="ajouter_une_pi_ce">Ajouter une pièce</string>
     <string name="ajout_mur">Ajout mur</string>
     <string name="annuler">Annuler</string>
+    <string name="nom_de_pi_ce">Nom de pièce :</string>
 </resources>
