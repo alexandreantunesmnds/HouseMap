@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.housemap.model.Batiment;
+import com.example.housemap.model.FabriqueNumero;
 import com.example.housemap.model.Mur;
 import com.example.housemap.model.Piece;
 import org.json.JSONException;
@@ -126,6 +127,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 Intent intent = new Intent(this, ConstructionActivity.class) ;
+                intent.putExtra("maison", maison); //where user is an instance of User object
                 startActivity(intent) ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
@@ -136,7 +138,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             nomPieceS = nomPiece.getText().toString();
             //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce s'appelle : "+nomPieceS, Toast.LENGTH_SHORT).show();
-            piece = new Piece(nomPieceS,1); //TODO:revoirlesnumpieces
+            int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
+            piece = new Piece(nomPieceS,numPiece); //TODO:revoirlesnumpieces
+            Toast.makeText(PieceEnCoursActivity.this, "La pièce a le num, "+this.piece.getNoPiece(), Toast.LENGTH_SHORT).show();
             maison.ajouterPiece(piece);
             Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
             Button valider = findViewById(R.id.button4);
