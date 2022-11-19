@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,8 +41,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         nomPiece = findViewById(R.id.editTextTextNamePiece);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
-            Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -140,6 +139,10 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             piece = new Piece(nomPieceS,1); //TODO:revoirlesnumpieces
             maison.ajouterPiece(piece);
             Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+            Button valider = findViewById(R.id.button4);
+            valider.setEnabled(false);
+            valider.setVisibility(View.INVISIBLE);
+            nomPiece.setVisibility(View.INVISIBLE);
         }
         else{
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
