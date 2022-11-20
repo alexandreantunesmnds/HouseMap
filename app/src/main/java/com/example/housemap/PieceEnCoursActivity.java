@@ -40,6 +40,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_piece_en_cours);
         Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         nomPiece = findViewById(R.id.editTextTextNamePiece);
+        piece = new Piece();
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
@@ -118,6 +119,10 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
+                int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
+                piece.setNoPiece(numPiece);
+                piece.setTabMur(tabMur);
+                maison.ajouterPiece(piece);
                 /*for (Mur mur : tabMur) {
                     Log.i("Nom image piece :", (String) mur.getPhoto().getTag()); //Affichage correct du nom des images
                 }*/
@@ -137,11 +142,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             nomPieceS = nomPiece.getText().toString();
-            //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce s'appelle : "+nomPieceS, Toast.LENGTH_SHORT).show();
-            int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
-            piece = new Piece(nomPieceS,numPiece); //TODO:revoirlesnumpieces
-            Toast.makeText(PieceEnCoursActivity.this, "La pièce a le num, "+this.piece.getNoPiece(), Toast.LENGTH_SHORT).show();
-            maison.ajouterPiece(piece);
+            piece.setNom(nomPieceS);
             Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
             Button valider = findViewById(R.id.button4);
             valider.setEnabled(false);

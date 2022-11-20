@@ -6,9 +6,13 @@ public class Piece implements Serializable {
     private String nom;
     private int noPiece;
     private Mur [] tabMur = new Mur[4];
+
     public Piece() {
-        nom = "Nom de piece inconnu";
-        noPiece = 0;
+    }
+
+    public Piece(int noPiece) {
+        nom = "SalleSansNom";
+        noPiece = noPiece;
     }
 
     public Piece(String nom, int noPiece) {
