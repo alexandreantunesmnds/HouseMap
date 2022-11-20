@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickConstruction(View view) {
         Intent intent = new Intent(MainActivity.this, ConstructionActivity.class) ;
-        intent.putExtra("maison", maison); //where user is an instance of User object
+        Bundle extras = new Bundle();
+        extras.putSerializable("maison",maison);
+        intent.putExtras(extras);
         startActivity(intent) ;
     }
 

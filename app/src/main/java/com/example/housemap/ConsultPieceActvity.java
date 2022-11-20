@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.io.*;
 
 public class ConsultPieceActvity extends AppCompatActivity {
-    private static final String FILE_NAME="sauvfile";
+    private static final String FILE_NAME="salon";
     private String mur1;
     private String mur2;
     private String mur3;
@@ -50,7 +50,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //Log.i("lecture sauv", response);
+        Log.i("lecture sauv", response);
 
         try {
             JSONObject pieceObject = new JSONObject(response);

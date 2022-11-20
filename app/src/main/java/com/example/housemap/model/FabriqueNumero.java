@@ -1,6 +1,8 @@
 package com.example.housemap.model;
 
-    public class FabriqueNumero {
+import java.io.Serializable;
+
+public class FabriqueNumero implements Serializable {
         private static FabriqueNumero instance = new FabriqueNumero();
         private int cptPiece;
 

@@ -35,7 +35,9 @@ public class ConstructionActivity extends AppCompatActivity {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
         Intent intent = new Intent(ConstructionActivity.this, PieceEnCoursActivity.class) ;
-        intent.putExtra("maison", maison); //where user is an instance of User object
+        Bundle extras = new Bundle();
+        extras.putSerializable("maison",maison);
+        intent.putExtras(extras);
         startActivity(intent) ;
     }
 

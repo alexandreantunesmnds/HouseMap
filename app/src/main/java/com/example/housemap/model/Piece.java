@@ -10,11 +10,6 @@ public class Piece implements Serializable {
     public Piece() {
     }
 
-    public Piece(int noPiece) {
-        nom = "SalleSansNom";
-        noPiece = noPiece;
-    }
-
     public Piece(String nom, int noPiece) {
         this.nom = nom;
         this.noPiece = noPiece;

@@ -18,14 +18,16 @@ import com.example.housemap.model.Batiment;
 import com.example.housemap.model.FabriqueNumero;
 import com.example.housemap.model.Mur;
 import com.example.housemap.model.Piece;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PieceEnCoursActivity extends AppCompatActivity {
-    private static final String FILE_NAME="sauvfile";
+    private String FILE_NAME;
     private final int PHOTO = 1;
     private int nbPrises;
     private Mur[] tabMur = new Mur[4];
@@ -71,16 +73,19 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void sauvegarder() throws IOException {
 
         JSONObject json = new JSONObject();
-        String mur1 = (String) tabMur[0].getPhoto().getTag();
-        String mur2 = (String) tabMur[1].getPhoto().getTag();
-        String mur3 = (String) tabMur[2].getPhoto().getTag();
-        String mur4 = (String) tabMur[3].getPhoto().getTag();
+        List<String> listNom = new ArrayList<String>();
+        for(int i=0;i<tabMur.length;i++){
+            listNom.add(tabMur[i].getPhoto().getTag().toString());
+        }
+        JSONArray array = new JSONArray();
+        for(int i = 0; i < listNom.size(); i++) {
+            array.put(listNom.get(i));
+        }
         try {
             json.put("nom", piece.getNom());
-            json.put("mur1", mur1 );
-            json.put("mur2", mur2 );
-            json.put("mur3", mur3 );
-            json.put("mur4", mur4 );
+            json.put("num", piece.getNoPiece());
+            json.put("Nom images:",array);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -101,11 +106,12 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             FileInputStream fis;
             try {
                 ImageView img = new ImageView(this);
-                fos = openFileOutput("image"+nbPrises+".data", MODE_PRIVATE);//image1,image2...
-                fis = openFileInput("image"+nbPrises+".data");
+                String nameFile = nomPieceS+nbPrises+".data";
+                fos = openFileOutput(nameFile, MODE_PRIVATE);
+                fis = openFileInput(nameFile);
                 Bitmap bm = BitmapFactory.decodeStream(fis);
                 img.setImageBitmap(bm);
-                img.setTag("image"+nbPrises+".data");
+                img.setTag(nameFile);
                 Mur mur = new Mur(nbPrises,img);
                 tabMur[nbPrises]=mur;
                 nbPrises++;
@@ -123,17 +129,17 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 piece.setNoPiece(numPiece);
                 piece.setTabMur(tabMur);
                 maison.ajouterPiece(piece);
-                /*for (Mur mur : tabMur) {
-                    Log.i("Nom image piece :", (String) mur.getPhoto().getTag()); //Affichage correct du nom des images
-                }*/
+                Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
                 try {
                     this.sauvegarder();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Intent intent = new Intent(this, ConstructionActivity.class) ;
-                intent.putExtra("maison", maison); //where user is an instance of User object
-                startActivity(intent) ;
+                Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
+                Bundle extras2 = new Bundle();
+                extras2.putSerializable("maison",maison);
+                intent.putExtras(extras2);
+                startActivity(intent); ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
@@ -142,8 +148,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             nomPieceS = nomPiece.getText().toString();
+            FILE_NAME = nomPieceS;
             piece.setNom(nomPieceS);
-            Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
             Button valider = findViewById(R.id.button4);
             valider.setEnabled(false);
             valider.setVisibility(View.INVISIBLE);
@@ -152,5 +158,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         else{
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void clickAnnuler(View view) {
     }
 }
