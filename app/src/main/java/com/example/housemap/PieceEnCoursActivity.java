@@ -161,5 +161,13 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     }
 
     public void clickAnnuler(View view) {
+        if(this.piece != null && this.maison != null) {
+            this.maison.retirerPiece(this.piece);
+        }
+        Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
+        startActivity(intent) ;
+        Toast.makeText(PieceEnCoursActivity.this, "Vous avez annulé la saisie d'une pièce", Toast.LENGTH_SHORT).show();
     }
+
+    //TODO:ajouter la boussole (aider utilisateur à prendre la photo exemple: est)
 }

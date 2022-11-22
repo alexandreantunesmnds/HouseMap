@@ -13,7 +13,6 @@ public class Piece implements Serializable {
     public Piece(String nom, int noPiece) {
         this.nom = nom;
         this.noPiece = noPiece;
-        this.tabMur = tabMur;
     }
 
     public String getNom() {

@@ -15,6 +15,10 @@ public class Batiment implements Serializable {
         listPieces.add(piece);
     }
 
+    public void retirerPiece(Piece piece){
+        listPieces.remove(piece);
+    }
+
     public int getNbPieces(){
         return listPieces.size();
     }
