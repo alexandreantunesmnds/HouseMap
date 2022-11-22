@@ -43,6 +43,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         nomPiece = findViewById(R.id.editTextTextNamePiece);
         piece = new Piece();
+        int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
+        piece.setNoPiece(numPiece);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
@@ -75,7 +77,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
         List<String> listNom = new ArrayList<String>();
         for(int i=0;i<tabMur.length;i++){
-            listNom.add(tabMur[i].getPhoto().getTag().toString());
+            listNom.add(tabMur[i].getNomPhoto());
         }
         JSONArray array = new JSONArray();
         for(int i = 0; i < listNom.size(); i++) {
@@ -96,8 +98,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(userString);
         bufferedWriter.close();
+
+        Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("maison",maison);
+        intent.putExtras(extras2);
+        startActivityForResult(intent,2);
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
@@ -111,8 +119,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 fis = openFileInput(nameFile);
                 Bitmap bm = BitmapFactory.decodeStream(fis);
                 img.setImageBitmap(bm);
-                img.setTag(nameFile);
-                Mur mur = new Mur(nbPrises,img);
+                Mur mur = new Mur(nbPrises,nameFile);
                 tabMur[nbPrises]=mur;
                 nbPrises++;
             } catch (FileNotFoundException e) {
@@ -125,8 +132,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
-                piece.setNoPiece(numPiece);
                 piece.setTabMur(tabMur);
                 maison.ajouterPiece(piece);
                 Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
@@ -135,11 +140,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
-                Bundle extras2 = new Bundle();
-                extras2.putSerializable("maison",maison);
-                intent.putExtras(extras2);
-                startActivity(intent); ;
                 Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
