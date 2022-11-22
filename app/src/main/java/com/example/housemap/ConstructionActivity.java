@@ -27,6 +27,13 @@ public class ConstructionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_construction);
+        if(getIntent().getExtras() != null) {
+            maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+        }
+        for(int i = 0;i<maison.getNbPieces();i++){
+            Toast.makeText(ConstructionActivity.this, "La pièce est :"+maison.getPiece(i).getNom(), Toast.LENGTH_SHORT).show();
+        }
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -38,18 +45,14 @@ public class ConstructionActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        startActivity(intent) ;
+        startActivity(intent); ;
     }
 
     public void clickConsultPiece(View view) {
         Intent intent = new Intent(this, ConsultPieceActvity.class) ;
-        startActivity(intent) ;
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            extras.get("maison");
-        }
+        Bundle extras = new Bundle();
+        extras.putSerializable("maison",maison);
+        intent.putExtras(extras);
+        //startActivityForResult(intent,2);
     }
 }

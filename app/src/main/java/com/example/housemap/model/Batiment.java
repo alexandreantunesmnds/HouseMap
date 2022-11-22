@@ -22,4 +22,11 @@ public class Batiment implements Serializable {
     public int getNbPieces(){
         return listPieces.size();
     }
+
+    public Piece getPiece(int index){
+        return listPieces.get(index);
+    }
+    public List<Piece> getListPieces(){
+        return listPieces;
+    }
 }

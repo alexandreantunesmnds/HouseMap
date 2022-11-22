@@ -29,6 +29,7 @@ import java.util.List;
 public class PieceEnCoursActivity extends AppCompatActivity {
     private String FILE_NAME;
     private final int PHOTO = 1;
+    private final int CREATE = 2;
     private int nbPrises;
     private Mur[] tabMur = new Mur[4];
     private Piece piece;
@@ -90,7 +91,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Bundle extras2 = new Bundle();
         extras2.putSerializable("maison",maison);
         intent.putExtras(extras2);
-        startActivityForResult(intent,2);
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
+        startActivityForResult(intent,3);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -132,13 +134,13 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             if(nbPrises==4){
                 piece.setTabMur(tabMur);
                 maison.ajouterPiece(piece);
-                Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
                 try {
                     this.sauvegarder();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
     }
