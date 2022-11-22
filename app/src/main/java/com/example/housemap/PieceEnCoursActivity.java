@@ -35,6 +35,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private Batiment maison;
     private String nomPieceS;
     private EditText nomPiece;
+    private Button ajout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
+        ajout = findViewById(R.id.button3);
+        ajout.setEnabled(false);
     }
 
     public void clickAjoutMur(View view) {
@@ -142,6 +145,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
 
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
+            ajout.setEnabled(true);
             nomPieceS = nomPiece.getText().toString();
             FILE_NAME = nomPieceS;
             piece.setNom(nomPieceS);
