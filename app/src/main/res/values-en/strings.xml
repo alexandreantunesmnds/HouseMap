@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HouseMap</string>
+    <string name="construction">Construction</string>
+    <string name="visualisation">Visualization</string>
+    <string name="consulter_les_pieces">Rooms</string>
+    <string name="ajouter_une_pi_ce">Add a room</string>
+    <string name="ajout_mur">Add a wall</string>
+    <string name="annuler">Cancel</string>
+    <string name="nom_de_pi_ce">Name of room :</string>
+    <string name="valider">Validate</string>
+    <string name="capteurs">Sensors</string>
+    <string name="boussole">Compass</string>
+</resources>

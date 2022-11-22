@@ -15,7 +15,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="220dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="112dp" android:layout_marginEnd="112dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:iconTint="#E91E63" android:backgroundTint="#E91E63" android:textColor="#000000"/>
     <Button
             android:text="@string/consulter_les_pieces"
             android:layout_width="wrap_content"
@@ -24,5 +25,6 @@
             android:onClick="clickConsultPiece"
             android:layout_marginTop="325dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="99dp" android:layout_marginEnd="100dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            android:backgroundTint="#4CAF50" android:textColor="#263238"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
