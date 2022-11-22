@@ -8,4 +8,6 @@
     <string name="annuler">Annuler</string>
     <string name="nom_de_pi_ce">Nom de pièce :</string>
     <string name="valider">Valider</string>
+    <string name="capteurs">Capteurs</string>
+    <string name="boussole">Boussole</string>
 </resources>

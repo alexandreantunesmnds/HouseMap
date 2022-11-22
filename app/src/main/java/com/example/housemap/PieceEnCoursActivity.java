@@ -169,5 +169,10 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Toast.makeText(PieceEnCoursActivity.this, "Vous avez annulé la saisie d'une pièce", Toast.LENGTH_SHORT).show();
     }
 
+    public void clickBoussole(View view) {
+        Intent intent = new Intent(PieceEnCoursActivity.this, CapteursActivity.class);
+        startActivity(intent) ;
+    }
+
     //TODO:ajouter la boussole (aider utilisateur à prendre la photo exemple: est)
 }
