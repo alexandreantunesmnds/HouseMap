@@ -54,22 +54,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, PHOTO);
-                /*switch(nbPrises) {
-                    case 0:
-                        Toast.makeText(ConstructionActivity.this, "Prenez la photo Nord", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        Toast.makeText(ConstructionActivity.this, "Prenez la photo Sud", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(ConstructionActivity.this, "Prenez la photo Est", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3:
-                        Toast.makeText(ConstructionActivity.this, "Prenez la photo Ouest", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-
-            }*/
         }
     }
     public void sauvegarder() throws IOException {
@@ -108,6 +92,17 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO && resultCode == RESULT_OK) {
+            switch (nbPrises) {
+                case 0:
+                    Toast.makeText(PieceEnCoursActivity.this, "Prenez la photo Sud", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(PieceEnCoursActivity.this, "Prenez la photo Est", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(PieceEnCoursActivity.this, "Prenez la photo Ouest", Toast.LENGTH_SHORT).show();
+                    break;
+            }
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             FileOutputStream fos;
@@ -154,6 +149,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             valider.setEnabled(false);
             valider.setVisibility(View.INVISIBLE);
             nomPiece.setVisibility(View.INVISIBLE);
+            Toast.makeText(PieceEnCoursActivity.this, "Prenez la photo Nord", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
