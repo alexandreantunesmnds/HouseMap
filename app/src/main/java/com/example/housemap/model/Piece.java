@@ -26,6 +26,12 @@ public class Piece implements Serializable {
     public Mur[] getTabMur() {
         return tabMur;
     }
+    public Mur getMur(int i){
+        if(i<tabMur.length) {
+            return tabMur[i];
+        }
+        return null;
+    }
 
     public void setNom(String nom) {
         this.nom = nom;

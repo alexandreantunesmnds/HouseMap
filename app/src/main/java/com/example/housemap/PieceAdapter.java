@@ -1,16 +1,23 @@
 package com.example.housemap;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.housemap.model.Mur;
 import com.example.housemap.model.Piece;
+import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHolder> {
@@ -31,7 +38,18 @@ public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHol
 
     public void onBindViewHolder(@NonNull @NotNull PieceViewHolder holder, int position) {
         Piece piece = pieceList.get(position);
-        holder.name_piece.setText(piece.getNom()); //TODO:On peut ajouter les images des pièces
+        holder.name_piece.setText(piece.getNom());
+        Mur premMur = piece.getMur(0);
+        ImageView img = holder.img_piece;
+        FileInputStream fis;
+        try {
+            fis = mContext.openFileInput(premMur.getNomPhoto());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Bitmap bm = BitmapFactory.decodeStream(fis);
+        //Picasso.get().load(premMur.getNomPhoto()).into(holder.img_piece);
+        holder.img_piece.setImageBitmap(bm);
     }
 
     @Override
