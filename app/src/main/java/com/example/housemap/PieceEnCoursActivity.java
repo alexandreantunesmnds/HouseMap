@@ -29,7 +29,6 @@ import java.util.List;
 public class PieceEnCoursActivity extends AppCompatActivity {
     private String FILE_NAME;
     private final int PHOTO = 1;
-    private final int CREATE = 2;
     private int nbPrises;
     private Mur[] tabMur = new Mur[4];
     private Piece piece;

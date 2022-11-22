@@ -27,6 +27,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
     List<Piece> pieceList;
     PieceAdapter adapter;
     Batiment maison;
+    private final int RECYCL = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,11 @@ public class ConsultPieceActvity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pieceList = new ArrayList<>();
+        pieceList = maison.getListPieces();
         adapter = new PieceAdapter(this,pieceList);
         recyclerView.setAdapter(adapter);
         this.getPieces();
+        Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
         //printPieces();
     }
 
@@ -51,7 +54,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             maison = (Batiment) extras.get("maison");
             pieceList = maison.getListPieces();
-            Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
         }
     }
 

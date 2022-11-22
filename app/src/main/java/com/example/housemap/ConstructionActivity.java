@@ -22,6 +22,7 @@ import java.io.IOException;
 
 public class ConstructionActivity extends AppCompatActivity {
     private Batiment maison;
+    private final int RECYCL = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,6 @@ public class ConstructionActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        //startActivityForResult(intent,2);
+        startActivityForResult(intent,2);
     }
 }
