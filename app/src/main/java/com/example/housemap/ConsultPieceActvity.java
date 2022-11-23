@@ -21,7 +21,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultPieceActvity extends AppCompatActivity {
+public class ConsultPieceActvity extends AppCompatActivity implements RecyclerViewInterface{
     private static final String FILE_NAME = "salon";
     RecyclerView recyclerView;
     List<Piece> pieceList;
@@ -41,7 +41,7 @@ public class ConsultPieceActvity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pieceList = new ArrayList<>();
         pieceList = maison.getListPieces();
-        adapter = new PieceAdapter(this,pieceList);
+        adapter = new PieceAdapter(this,pieceList,this);
         recyclerView.setAdapter(adapter);
         this.getPieces();
         Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
@@ -62,5 +62,11 @@ public class ConsultPieceActvity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     private void getPieces() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void OnItemClick(int position) {
+        Intent intent = new Intent(this, ChangerActivity.class) ;
+        startActivity(intent); //TODO:https://www.google.com/search?channel=fs&client=ubuntu&q=click+on+item+recyclerview#fpstate=ive&vld=cid:fe26e79c,vid:7GPUpvcU1FE
     }
 }

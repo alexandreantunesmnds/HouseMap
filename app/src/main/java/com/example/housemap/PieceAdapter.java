@@ -1,6 +1,7 @@
 package com.example.housemap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -20,13 +21,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHolder> {
+public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHolder> implements  RecyclerViewInterface{
     Context mContext;
     List<Piece> pieceList;
+    private final RecyclerViewInterface recyclerViewInterface;
 
-    public PieceAdapter(Context mContext, List<Piece> pieceList) {
+    public PieceAdapter(Context mContext, List<Piece> pieceList, RecyclerViewInterface recyclerViewInterface) {
         this.mContext = mContext;
         this.pieceList = pieceList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -57,6 +60,11 @@ public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHol
         return pieceList.size();
     }
 
+    @Override
+    public void OnItemClick(int position) {
+
+    }
+
     public class PieceViewHolder extends RecyclerView.ViewHolder {
         TextView name_piece,phone_piece;
         CircleImageView img_piece;
@@ -65,6 +73,18 @@ public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHol
             super(itemView);
             name_piece = itemView.findViewById(R.id.name_piece);
             img_piece = itemView.findViewById(R.id.img_piece);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.OnItemClick(pos);
+                        }
+
+                    }
+                }
+            });
         }
     }
 }
