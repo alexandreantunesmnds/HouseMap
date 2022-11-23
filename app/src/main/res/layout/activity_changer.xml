@@ -6,12 +6,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ChangerActivity">
-
+    <EditText
+            android:layout_width="225dp"
+            android:layout_height="52dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editTextTextNamePiece3"
+            android:minHeight="48dp" android:autofillHints="" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.086" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="56dp" android:textSize="16sp"
+            android:hint="@string/nom_de_pi_ce" android:textColorHint="#757575"/>
     <Button
-            android:text="Mur1..."
-            android:layout_width="218dp"
-            android:layout_height="62dp" android:id="@+id/button7"
-            android:backgroundTint="#7B1FA2"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="295dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="309dp"/>
+            android:text="@string/valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonValide"
+            android:layout_marginStart="28dp" app:layout_constraintStart_toEndOf="@+id/editTextTextNamePiece3"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="56dp" android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent" app:iconTint="#2196F3" android:backgroundTint="#03A9F4"
+            android:textColor="#4A148C"/>
+    <Button
+            android:text="@string/mur_ouest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button6"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="367dp"/>
+    <Button
+            android:text="@string/mur_nord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button7"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="148dp"/>
+    <Button
+            android:text="@string/mur_sud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button8"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="216dp"/>
+    <Button
+            android:text="@string/mur_est"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button9"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="288dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

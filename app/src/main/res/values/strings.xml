@@ -10,4 +10,8 @@
     <string name="valider">Valider</string>
     <string name="capteurs">Capteurs</string>
     <string name="boussole">Boussole</string>
+    <string name="mur_nord">Mur Nord</string>
+    <string name="mur_sud">Mur sud</string>
+    <string name="mur_est">Mur est</string>
+    <string name="mur_ouest">Mur ouest</string>
 </resources>
