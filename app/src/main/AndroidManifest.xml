@@ -14,6 +14,12 @@
             android:theme="@style/Theme.HouseMap"
             tools:targetApi="31">
         <activity
+                android:name=".AfficheMurActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".PorteActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".ChangerActivity"
                 android:exported="false"/>
         <activity

@@ -15,4 +15,5 @@
     <string name="mur_est">Mur est</string>
     <string name="mur_ouest">Mur ouest</string>
     <string name="nouveau_nom_de_pi_ce">Nouveau nom de pièce :</string>
+    <string name="ajouter_porte">ajouter porte</string>
 </resources>

@@ -20,6 +20,10 @@ public class Mur implements Serializable {
         return noMur;
     }
 
+    public int getNoMur() {
+        return noMur;
+    }
+
     public String getNomPhoto() {
         return nomPhoto;
     }

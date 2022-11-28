@@ -59,7 +59,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             startActivityForResult(intent, PHOTO);
         }
     }
-    public void sauvegarder() throws IOException {
+    /** public void sauvegarder() throws IOException {
 
         JSONObject json = new JSONObject();
         List<String> listNom = new ArrayList<String>();
@@ -86,13 +86,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         bufferedWriter.write(userString);
         bufferedWriter.close();
 
-        Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
-        Bundle extras2 = new Bundle();
-        extras2.putSerializable("maison",maison);
-        intent.putExtras(extras2);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,3);
+        //Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
+        //Bundle extras2 = new Bundle();
+        //extras2.putSerializable("maison",maison);
+        //intent.putExtras(extras2);
+        //setResult(RESULT_OK) ; // ou RESULT_CANCELED
+        //startActivityForResult(intent,3);
     }
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO && resultCode == RESULT_OK) {
@@ -119,7 +120,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 Bitmap bm = BitmapFactory.decodeStream(fis);
                 img.setImageBitmap(bm);
                 Mur mur = new Mur(nbPrises,nameFile);
-                tabMur[nbPrises]=mur;
+                this.piece.ajouterMur(mur);
                 nbPrises++;
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -131,14 +132,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                piece.setTabMur(tabMur);
                 maison.ajouterPiece(piece);
                 //Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
-                try {
-                    this.sauvegarder();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                //this.sauvegarder();
                 //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
@@ -175,5 +171,12 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         startActivity(intent) ;
     }
 
-    //TODO:ajouter la boussole (aider utilisateur à prendre la photo exemple: est)
+    public void clickAjoutPorte(View view) {
+        Intent intent = new Intent(PieceEnCoursActivity.this, PorteActivity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("piece",piece);
+        intent.putExtras(extras2);
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
+        startActivityForResult(intent,5); ;
+    }
 }

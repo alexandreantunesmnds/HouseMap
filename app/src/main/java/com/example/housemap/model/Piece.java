@@ -32,6 +32,9 @@ public class Piece implements Serializable {
         }
         return null;
     }
+    public void ajouterMur(Mur mur){
+        this.tabMur[mur.getNoMur()] = mur;
+    }
 
     public void setNom(String nom) {
         this.nom = nom;
