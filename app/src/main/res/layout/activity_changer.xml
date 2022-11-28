@@ -15,7 +15,7 @@
             android:minHeight="48dp" android:autofillHints="" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.086" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="56dp" android:textSize="16sp"
-            android:hint="@string/nom_de_pi_ce" android:textColorHint="#757575"/>
+            android:hint="@string/nouveau_nom_de_pi_ce" android:textColorHint="#757575"/>
     <Button
             android:text="@string/valider"
             android:layout_width="wrap_content"
