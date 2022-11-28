@@ -1,7 +1,9 @@
 package com.example.housemap;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,7 +83,7 @@ public class AfficheMurActivity extends AppCompatActivity {
     public void dessinerRectangle(Rect rect){
         Canvas canvas = holder.lockCanvas();
         paint = new Paint();
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.MAGENTA);
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
@@ -88,9 +91,26 @@ public class AfficheMurActivity extends AppCompatActivity {
         holder.unlockCanvasAndPost(canvas);
     }
     public void coupeImage() {
-        Dialog couper = new Dialog(this);
+        AlertDialog.Builder couper = new AlertDialog.Builder(this);
         BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
         Bitmap bmp = bmpDraw.getBitmap();
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        couper.setView(input);
+
+        couper.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = String.valueOf(input.getText());
+                // Do something with value!
+            }
+        });
+
+        couper.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
 
         Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
         if (x >= 0 && y >= 0) {
@@ -105,7 +125,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                 ImageView rogView = new ImageView(this);
                 rogView.setImageBitmap(rog);
 
-                couper.setContentView(rogView);
+                //couper.setContentView(rogView);
                 couper.show();
             } else {
                 Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
