@@ -5,12 +5,15 @@ import java.io.Serializable;
 public class FabriqueNumero implements Serializable {
         private static FabriqueNumero instance = new FabriqueNumero();
         private int cptPiece;
+        private int cptSortie;
 
-        /**
+
+    /**
          * Constructeur
          */
         private FabriqueNumero(){
             this.cptPiece = 0;
+            this.cptSortie = 0;
         }
 
         /**
@@ -25,8 +28,16 @@ public class FabriqueNumero implements Serializable {
          * Fonction getNumeroEtape
          * @return le numéro de l'étape qui commence à partir de 0
          */
-        public int getNumeroEtape(){
+        public int getNumeroPiece(){
             return this.cptPiece++;
+        }
+
+        /**
+         * Fonction getNumeroEtape
+         * @return le numéro de l'étape qui commence à partir de 0
+         */
+        public int getNumeroSortie(){
+            return this.cptSortie++;
         }
 
         /**
@@ -34,5 +45,6 @@ public class FabriqueNumero implements Serializable {
          */
         public void reset(){
             this.cptPiece = 0;
+            this.cptSortie = 0;
         }
     }

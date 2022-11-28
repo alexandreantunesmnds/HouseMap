@@ -3,6 +3,7 @@ package com.example.housemap.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Batiment implements Serializable {
     private String nomBat;
@@ -28,5 +29,21 @@ public class Batiment implements Serializable {
     }
     public List<Piece> getListPieces(){
         return listPieces;
+    }
+    public Boolean pieceIsInBat(String nomPiece){
+        for (Piece listPiece : listPieces) {
+            if (Objects.equals(listPiece.getNom(), nomPiece)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Piece getPiece(String nomPiece){
+        for (Piece listPiece : listPieces) {
+            if (Objects.equals(listPiece.getNom(), nomPiece)) {
+                return listPiece;
+            }
+        }
+        return null;
     }
 }

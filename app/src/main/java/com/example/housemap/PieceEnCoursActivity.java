@@ -44,7 +44,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
         nomPiece = findViewById(R.id.editTextTextNamePiece);
         piece = new Piece();
-        int numPiece = FabriqueNumero.getInstance().getNumeroEtape();
+        int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
         piece.setNoPiece(numPiece);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
@@ -175,6 +175,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         Intent intent = new Intent(PieceEnCoursActivity.this, PorteActivity.class);
         Bundle extras2 = new Bundle();
         extras2.putSerializable("piece",piece);
+        extras2.putSerializable("maison",maison);
         intent.putExtras(extras2);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,5); ;

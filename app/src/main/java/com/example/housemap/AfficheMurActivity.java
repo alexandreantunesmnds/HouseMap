@@ -16,8 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.housemap.model.Mur;
-import com.example.housemap.model.Piece;
+import com.example.housemap.model.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,6 +32,8 @@ public class AfficheMurActivity extends AppCompatActivity {
     private int y2 = 0;
     private Rect rect;
     private SurfaceHolder holder;
+    private Batiment maison;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -43,6 +44,7 @@ public class AfficheMurActivity extends AppCompatActivity {
         setResult(RESULT_OK); // ou RESULT_CANCELED
         if (getIntent().getExtras() != null) {
             mur = (Mur) getIntent().getSerializableExtra("mur");
+            maison = (Batiment) getIntent().getSerializableExtra("maison");
         }
         FileInputStream fis;
         try {
@@ -94,7 +96,6 @@ public class AfficheMurActivity extends AppCompatActivity {
         AlertDialog.Builder couper = new AlertDialog.Builder(this);
         BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
         Bitmap bmp = bmpDraw.getBitmap();
-
         // Set an EditText view to get user input
         final EditText input = new EditText(this);
         couper.setView(input);
@@ -122,11 +123,18 @@ public class AfficheMurActivity extends AppCompatActivity {
             if (y + hauteur < redimension.getHeight()) {
                 Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
 
-                ImageView rogView = new ImageView(this);
+                ImageView rogView = new ImageView(this); //image récupéréé de la sortie
                 rogView.setImageBitmap(rog);
 
-                //couper.setContentView(rogView);
                 couper.show();
+                String nomPiece = String.valueOf(input.getText());
+                int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
+                if(maison.pieceIsInBat(nomPiece)){
+                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
+                    mur.ajouterSortie(sortie);
+
+                }
+
             } else {
                 Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
             }

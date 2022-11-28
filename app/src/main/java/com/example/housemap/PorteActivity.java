@@ -11,6 +11,7 @@ import com.example.housemap.model.Piece;
 
 public class PorteActivity extends AppCompatActivity {
     private Piece piece;
+    private Batiment maison;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class PorteActivity extends AppCompatActivity {
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
+            maison = (Batiment) getIntent().getSerializableExtra("maison");
         }
     }
 
@@ -27,6 +29,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur est = piece.getMur(2);
         extras.putSerializable("mur",est);
+        extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,4);
@@ -37,6 +40,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur ouest = piece.getMur(3);
         extras.putSerializable("mur",ouest);
+        extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,4);
@@ -47,6 +51,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur nord = piece.getMur(0);
         extras.putSerializable("mur",nord);
+        extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,4);
@@ -57,6 +62,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur sud = piece.getMur(1);
         extras.putSerializable("mur",sud);
+        extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,4);
