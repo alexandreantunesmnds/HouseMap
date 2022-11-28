@@ -33,6 +33,8 @@ public class AfficheMurActivity extends AppCompatActivity {
     private Rect rect;
     private SurfaceHolder holder;
     private Batiment maison;
+    private String nomPiece;
+    private Piece pieceEnCours;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -44,6 +46,7 @@ public class AfficheMurActivity extends AppCompatActivity {
         setResult(RESULT_OK); // ou RESULT_CANCELED
         if (getIntent().getExtras() != null) {
             mur = (Mur) getIntent().getSerializableExtra("mur");
+            pieceEnCours = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison");
         }
         FileInputStream fis;
@@ -85,9 +88,9 @@ public class AfficheMurActivity extends AppCompatActivity {
     public void dessinerRectangle(Rect rect){
         Canvas canvas = holder.lockCanvas();
         paint = new Paint();
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(10);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.MAGENTA);
+        paint.setColor(Color.RED);
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         canvas.drawRect(rect, paint);
         holder.unlockCanvasAndPost(canvas);
@@ -100,16 +103,32 @@ public class AfficheMurActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         couper.setView(input);
 
-        couper.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        couper.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String value = String.valueOf(input.getText());
-                // Do something with value!
+                nomPiece = String.valueOf(input.getText());
+                int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
+                if(maison.pieceIsInBat(nomPiece)){ //si la piece existe deja
+                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
+                    mur.ajouterSortie(sortie);
+                }
+                else{
+                    nomPiece = String.valueOf(input.getText());
+                    int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
+                    Piece piece = new Piece(nomPiece,numPiece);
+                    maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
+                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
+                    mur.ajouterSortie(sortie);
+                    Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+sortie.getNomPiece(), Toast.LENGTH_SHORT).show();
+                    pieceEnCours.modifierMur(mur);
+                    maison.mettreAJourPiece(pieceEnCours);
+
+                }
             }
         });
 
-        couper.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        couper.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
+                // Canceled
             }
         });
 
@@ -125,15 +144,7 @@ public class AfficheMurActivity extends AppCompatActivity {
 
                 ImageView rogView = new ImageView(this); //image récupéréé de la sortie
                 rogView.setImageBitmap(rog);
-
                 couper.show();
-                String nomPiece = String.valueOf(input.getText());
-                int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
-                if(maison.pieceIsInBat(nomPiece)){
-                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
-                    mur.ajouterSortie(sortie);
-
-                }
 
             } else {
                 Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
@@ -143,5 +154,16 @@ public class AfficheMurActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void clickValider(View view) {
+        Intent intent = new Intent(AfficheMurActivity.this, PieceEnCoursActivity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("maison",maison);
+        //extras2.putSerializable("mur",mur);
+        //extras2.putSerializable("piece",pieceEnCours);
+        intent.putExtras(extras2);
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
+        startActivityForResult(intent,7);
     }
 }

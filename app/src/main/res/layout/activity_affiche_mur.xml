@@ -13,7 +13,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="152dp" app:layout_constraintStart_toStartOf="parent"
             android:adjustViewBounds="true"
-            android:layout_marginStart="36dp" android:contentDescription="TODO"
+            android:layout_marginStart="36dp" android:contentDescription="@string/todo"
             android:layout_marginEnd="39dp" app:layout_constraintEnd_toEndOf="parent"/>
     <SurfaceView
             android:layout_width="336dp"
@@ -22,4 +22,12 @@
             android:layout_marginTop="152dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="36dp" android:layout_marginEnd="39dp"
             app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+            android:text="@string/Valider"
+            android:onClick="clickValider"
+            android:layout_width="148dp"
+            android:layout_height="57dp" android:id="@+id/button15"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="547dp" android:backgroundTint="#689F38" android:textColor="#212121"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

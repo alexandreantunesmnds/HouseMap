@@ -29,6 +29,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur est = piece.getMur(2);
         extras.putSerializable("mur",est);
+        extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
@@ -40,6 +41,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur ouest = piece.getMur(3);
         extras.putSerializable("mur",ouest);
+        extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
@@ -51,6 +53,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur nord = piece.getMur(0);
         extras.putSerializable("mur",nord);
+        extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
@@ -62,6 +65,7 @@ public class PorteActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         Mur sud = piece.getMur(1);
         extras.putSerializable("mur",sud);
+        extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED

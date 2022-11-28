@@ -12,4 +12,8 @@ public class Sortie {
         this.noSortie = noSortie;
         this.zoneSortie = zoneSortie;
     }
+    public String getNomPiece(){
+        return this.piece.getNom();
+
+    }
 }

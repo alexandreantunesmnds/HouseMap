@@ -34,6 +34,9 @@ public class ConstructionActivity extends AppCompatActivity {
         for(int i = 0;i<maison.getNbPieces();i++){
             Toast.makeText(ConstructionActivity.this, "La pièce est :"+maison.getPiece(i).getNom(), Toast.LENGTH_SHORT).show();
         }
+        if(maison.getNbPieces() !=0) {
+            Toast.makeText(ConstructionActivity.this, "Le mur a une sortie vers :" + maison.getPiece(0).getMur(0).getSortie(0).getNomPiece(), Toast.LENGTH_SHORT).show();
+        }
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
     }
 

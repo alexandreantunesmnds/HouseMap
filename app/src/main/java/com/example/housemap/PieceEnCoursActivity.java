@@ -36,21 +36,29 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private String nomPieceS;
     private EditText nomPiece;
     private Button ajout;
+    private Mur mur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piece_en_cours);
-        Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
-        nomPiece = findViewById(R.id.editTextTextNamePiece);
-        piece = new Piece();
-        int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
-        piece.setNoPiece(numPiece);
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+            mur = (Mur) getIntent().getSerializableExtra("mur");
+            piece = (Piece) getIntent().getSerializableExtra("piece");
         }
-        ajout = findViewById(R.id.button3);
-        ajout.setEnabled(false);
+        if(maison.getNbPieces() == 0) { //problème
+            Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
+            nomPiece = findViewById(R.id.editTextTextNamePiece);
+            piece = new Piece();
+            int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
+            piece.setNoPiece(numPiece);
+            ajout = findViewById(R.id.button3);
+            ajout.setEnabled(false);
+            maison.ajouterPiece(piece);
+        }
+
     }
 
     public void clickAjoutMur(View view) {
@@ -132,7 +140,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                maison.ajouterPiece(piece);
                 //Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
                 //this.sauvegarder();
                 //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
@@ -179,5 +186,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         intent.putExtras(extras2);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,5); ;
+    }
+
+    public void clickValider(View view) {
+        Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("maison",maison);
+        intent.putExtras(extras2);
+        setResult(RESULT_OK) ; // ou RESULT_CANCELED
+        startActivityForResult(intent,3);
     }
 }

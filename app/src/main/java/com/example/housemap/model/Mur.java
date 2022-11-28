@@ -7,7 +7,7 @@ import java.util.List;
 public class Mur implements Serializable {
     private int noMur;
     private String nomPhoto;
-    private List<Object> listSorties;
+    private List<Sortie> listSorties;
     public Mur() {
         noMur = 0;
     }
@@ -28,6 +28,9 @@ public class Mur implements Serializable {
 
     public String getNomPhoto() {
         return nomPhoto;
+    }
+    public Sortie getSortie(int index){
+        return listSorties.get(index);
     }
 
     public void setNoPiece(int noPiece) {
