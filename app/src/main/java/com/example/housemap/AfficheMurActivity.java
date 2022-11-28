@@ -1,9 +1,16 @@
 package com.example.housemap;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.housemap.model.Mur;
@@ -15,25 +22,98 @@ import java.io.FileNotFoundException;
 public class AfficheMurActivity extends AppCompatActivity {
     private Mur mur;
     private ImageView img;
+    private SurfaceView sv;
+    private Paint paint;
+    private int x = 0;
+    private int y = 0;
+    private int x2 = 0;
+    private int y2 = 0;
+    private Rect rect;
+    private SurfaceHolder holder;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiche_mur);
         img = findViewById(R.id.img_mur);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        if(getIntent().getExtras() != null) {
+        setResult(RESULT_OK); // ou RESULT_CANCELED
+        if (getIntent().getExtras() != null) {
             mur = (Mur) getIntent().getSerializableExtra("mur");
         }
-            FileInputStream fis;
-            try {
-                fis = openFileInput(mur.getNomPhoto());
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+        FileInputStream fis;
+        try {
+            fis = openFileInput(mur.getNomPhoto());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Bitmap bm = BitmapFactory.decodeStream(fis);
+        // Reste à mettre bm à mettre sur l’ImageView
+        img.setImageBitmap(bm);
+        sv = findViewById(R.id.surfaceView);
+        sv.setZOrderOnTop(true);
+        holder = sv.getHolder();
+        holder.setFormat(PixelFormat.TRANSPARENT);
+        img.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (rect != null) {
+                        coupeImage();
+                    }
+                }
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    if (event.getPointerCount() == 2) {
+                        x = (int) event.getX(0);
+                        y = (int) event.getY(0);
+                        x2 = (int) event.getX(1);
+                        y2 = (int) event.getY(1);
+                        rect = new Rect(x, y, x2, y2);
+                        rect.sort();
+                        dessinerRectangle(rect);
+                    }
+                }
+                return true;
             }
-            Bitmap bm = BitmapFactory.decodeStream(fis);
-            // Reste à mettre bm à mettre sur l’ImageView
-            img.setImageBitmap(bm);
+        });
     }
+    public void dessinerRectangle(Rect rect){
+        Canvas canvas = holder.lockCanvas();
+        paint = new Paint();
+        paint.setStrokeWidth(10);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.MAGENTA);
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        canvas.drawRect(rect, paint);
+        holder.unlockCanvasAndPost(canvas);
+    }
+    public void coupeImage() {
+        Dialog couper = new Dialog(this);
+        BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
+        Bitmap bmp = bmpDraw.getBitmap();
 
+        Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
+        if (x >= 0 && y >= 0) {
+            int x = (int) (rect.left - img.getX());
+            int y = (int) (rect.top - img.getX());
+            int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
+            int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
+
+            if (y + hauteur < redimension.getHeight()) {
+                Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
+
+                ImageView rogView = new ImageView(this);
+                rogView.setImageBitmap(rog);
+
+                couper.setContentView(rogView);
+                couper.show();
+            } else {
+                Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 }

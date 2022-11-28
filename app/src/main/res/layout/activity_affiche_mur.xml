@@ -8,9 +8,18 @@
         tools:context=".AfficheMurActivity">
 
     <ImageView
-            android:layout_width="381dp"
-            android:layout_height="372dp" app:srcCompat="@drawable/icon_room" android:id="@+id/img_mur"
+            android:layout_width="336dp"
+            android:layout_height="312dp" app:srcCompat="@drawable/icon_room" android:id="@+id/img_mur"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="259dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginTop="152dp" app:layout_constraintStart_toStartOf="parent"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="36dp" android:contentDescription="TODO"
+            android:layout_marginEnd="39dp" app:layout_constraintEnd_toEndOf="parent"/>
+    <SurfaceView
+            android:layout_width="336dp"
+            android:layout_height="312dp" android:id="@+id/surfaceView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="152dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="36dp" android:layout_marginEnd="39dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
