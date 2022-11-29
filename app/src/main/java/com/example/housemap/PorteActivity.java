@@ -33,7 +33,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,4);
+        startActivityForResult(intent,7);
     }
 
     public void clickOuest(View view) {
@@ -45,7 +45,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,4);
+        startActivityForResult(intent,7);
     }
 
     public void clickNord(View view) {
@@ -57,7 +57,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,4);
+        startActivityForResult(intent,7);
     }
 
     public void clickSud(View view) {
@@ -69,6 +69,23 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,4);
+        startActivityForResult(intent,7);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 7) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(PorteActivity.this, PieceEnCoursActivity.class);
+                Batiment maison = (Batiment) data.getSerializableExtra("maison");
+                Piece piece = (Piece) data.getSerializableExtra("piece");
+                Toast.makeText(this, "hello",Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
     }
 }

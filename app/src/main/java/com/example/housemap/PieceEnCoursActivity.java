@@ -42,21 +42,27 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piece_en_cours);
+        nomPiece = findViewById(R.id.editTextTextNamePiece);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
-            mur = (Mur) getIntent().getSerializableExtra("mur");
+            //mur = (Mur) getIntent().getSerializableExtra("mur"); //on récupère le batiment créer
             piece = (Piece) getIntent().getSerializableExtra("piece");
             setResult(RESULT_OK, getIntent());
         }
-        if(maison.getNbPieces() == 0) { //problème
+        if(maison.getNbPieces()==0||!maison.pieceIsInBat(piece.getNom())) {
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
-            nomPiece = findViewById(R.id.editTextTextNamePiece);
             piece = new Piece();
             int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
             piece.setNoPiece(numPiece);
             ajout = findViewById(R.id.button3);
             ajout.setEnabled(false);
             maison.ajouterPiece(piece);
+        }
+        else{
+            Button valider = findViewById(R.id.button4);
+            valider.setEnabled(false);
+            valider.setVisibility(View.INVISIBLE);
+            nomPiece.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -144,6 +150,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
             }
         }
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 6) {
+            if (resultCode == RESULT_OK) {
+                maison = (Batiment) data.getSerializableExtra("maison");
+                piece = (Piece) data.getSerializableExtra("piece");
+                Toast.makeText(this, "hello",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void clickValiderNom(View view) {
@@ -184,10 +198,13 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         extras2.putSerializable("maison",maison);
         intent.putExtras(extras2);
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,5); ;
+        startActivityForResult(intent,6); ;
     }
 
     public void clickValider(View view) {
+        if(maison.getNbPieces() !=0) {
+            Toast.makeText(PieceEnCoursActivity.this, "Le mur a une sortie vers :" + maison.getPiece(0).getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
+        }
         Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
         Bundle extras2 = new Bundle();
         extras2.putSerializable("maison",maison);

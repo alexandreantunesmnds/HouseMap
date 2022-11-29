@@ -35,6 +35,7 @@ public class AfficheMurActivity extends AppCompatActivity {
     private Batiment maison;
     private String nomPiece;
     private Piece pieceEnCours;
+    private Sortie sortie;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -108,7 +109,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                 nomPiece = String.valueOf(input.getText());
                 int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
                 if(maison.pieceIsInBat(nomPiece)){ //si la piece existe deja
-                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
+                    sortie = new Sortie(maison.getPiece(nomPiece),numSortie,x,y,x2,y2);
                     mur.ajouterSortie(sortie);
                 }
                 else{
@@ -116,10 +117,11 @@ public class AfficheMurActivity extends AppCompatActivity {
                     int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
                     Piece piece = new Piece(nomPiece,numPiece);
                     maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
-                    Sortie sortie = new Sortie(maison.getPiece(nomPiece),numSortie,rect);
+                    sortie = new Sortie(maison.getPiece(nomPiece),numSortie,x,y,x2,y2);
                     mur.ajouterSortie(sortie);
+                    maison.mettreAJourPiece(piece);
+                    piece.modifierMur(mur);
                     Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+sortie.getNomPiece(), Toast.LENGTH_SHORT).show();
-                    pieceEnCours.modifierMur(mur);
 
                 }
             }
@@ -156,23 +158,12 @@ public class AfficheMurActivity extends AppCompatActivity {
     }
 
     public void clickValider(View view) {
+        //Toast.makeText(this, "sortie vers : "+ pieceEnCours.getMur(0).getSortie(0).getNomPiece(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AfficheMurActivity.this, PieceEnCoursActivity.class);
-        Bundle extras2 = new Bundle();
-        extras2.putSerializable("maison",maison);
-        extras2.putSerializable("piece",pieceEnCours);
-        //extras2.putSerializable("mur",mur);
-        //extras2.putSerializable("piece",pieceEnCours);
-        intent.putExtras(extras2);
-        startActivityForResult(intent,7);
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == 7) {
-            if (resultCode == RESULT_OK) {
-                Batiment maison = (Batiment) intent.getSerializableExtra("maison");
-                Piece piece = (Piece) intent.getSerializableExtra("piece");
-                // Do whatever with the updated object
-            }
-        }
+        intent.putExtra("maison", maison);
+        intent.putExtra("piece", pieceEnCours);
+        //intent.putExtra("mur", mur);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

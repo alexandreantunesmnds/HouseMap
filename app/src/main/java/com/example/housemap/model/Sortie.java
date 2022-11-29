@@ -5,14 +5,16 @@ import android.graphics.Rect;
 import java.io.Serializable;
 
 public class Sortie implements Serializable {
-    Piece piece;
-    int noSortie;
-    Rect zoneSortie;
+    private Piece piece;
+    private int noSortie;
+    private int x = 0;
+    private int y = 0;
+    private int x2 = 0;
+    private int y2 = 0;
 
-    public Sortie(Piece piece, int noSortie, Rect zoneSortie) {
+    public Sortie(Piece piece, int noSortie,int x,int y, int x2, int y2) {
         this.piece = piece;
         this.noSortie = noSortie;
-        this.zoneSortie = zoneSortie;
     }
     public String getNomPiece(){
         return this.piece.getNom();
