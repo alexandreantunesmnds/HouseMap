@@ -16,7 +16,11 @@ public class Batiment implements Serializable {
         listPieces.add(piece);
     }
     public void mettreAJourPiece(Piece piece){
-        listPieces.remove(piece);
+        for(Piece pieces : listPieces){
+            if(pieces.getNom()==piece.getNom()){
+                listPieces.remove(pieces);
+            }
+        }
         listPieces.add(piece);
     }
 

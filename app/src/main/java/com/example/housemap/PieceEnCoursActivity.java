@@ -42,11 +42,11 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piece_en_cours);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
             mur = (Mur) getIntent().getSerializableExtra("mur");
             piece = (Piece) getIntent().getSerializableExtra("piece");
+            setResult(RESULT_OK, getIntent());
         }
         if(maison.getNbPieces() == 0) { //problème
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
@@ -58,7 +58,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             ajout.setEnabled(false);
             maison.ajouterPiece(piece);
         }
-
     }
 
     public void clickAjoutMur(View view) {
@@ -196,4 +195,5 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,3);
     }
+
 }

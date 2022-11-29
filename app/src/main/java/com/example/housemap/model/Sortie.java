@@ -2,7 +2,9 @@ package com.example.housemap.model;
 
 import android.graphics.Rect;
 
-public class Sortie {
+import java.io.Serializable;
+
+public class Sortie implements Serializable {
     Piece piece;
     int noSortie;
     Rect zoneSortie;

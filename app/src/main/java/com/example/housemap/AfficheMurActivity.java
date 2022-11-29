@@ -43,11 +43,11 @@ public class AfficheMurActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiche_mur);
         img = findViewById(R.id.img_mur);
-        setResult(RESULT_OK); // ou RESULT_CANCELED
         if (getIntent().getExtras() != null) {
             mur = (Mur) getIntent().getSerializableExtra("mur");
             pieceEnCours = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison");
+            setResult(RESULT_OK, getIntent());
         }
         FileInputStream fis;
         try {
@@ -120,7 +120,6 @@ public class AfficheMurActivity extends AppCompatActivity {
                     mur.ajouterSortie(sortie);
                     Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+sortie.getNomPiece(), Toast.LENGTH_SHORT).show();
                     pieceEnCours.modifierMur(mur);
-                    maison.mettreAJourPiece(pieceEnCours);
 
                 }
             }
@@ -160,10 +159,20 @@ public class AfficheMurActivity extends AppCompatActivity {
         Intent intent = new Intent(AfficheMurActivity.this, PieceEnCoursActivity.class);
         Bundle extras2 = new Bundle();
         extras2.putSerializable("maison",maison);
+        extras2.putSerializable("piece",pieceEnCours);
         //extras2.putSerializable("mur",mur);
         //extras2.putSerializable("piece",pieceEnCours);
         intent.putExtras(extras2);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,7);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 7) {
+            if (resultCode == RESULT_OK) {
+                Batiment maison = (Batiment) intent.getSerializableExtra("maison");
+                Piece piece = (Piece) intent.getSerializableExtra("piece");
+                // Do whatever with the updated object
+            }
+        }
     }
 }
