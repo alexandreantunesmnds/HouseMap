@@ -82,7 +82,8 @@ public class PorteActivity extends AppCompatActivity {
                 Intent intent = new Intent(PorteActivity.this, PieceEnCoursActivity.class);
                 Batiment maison = (Batiment) data.getSerializableExtra("maison");
                 Piece piece = (Piece) data.getSerializableExtra("piece");
-                Toast.makeText(this, "hello",Toast.LENGTH_SHORT).show();
+                intent.putExtra("maison", maison);
+                intent.putExtra("piece", piece);
                 setResult(RESULT_OK, intent);
                 finish();
             }

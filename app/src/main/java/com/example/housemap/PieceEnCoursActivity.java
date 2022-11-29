@@ -155,7 +155,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
                 piece = (Piece) data.getSerializableExtra("piece");
-                Toast.makeText(this, "hello",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -203,7 +202,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
 
     public void clickValider(View view) {
         if(maison.getNbPieces() !=0) {
-            Toast.makeText(PieceEnCoursActivity.this, "Le mur a une sortie vers :" + maison.getPiece(0).getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(PieceEnCoursActivity.this, "Le mur a une sortie vers :" + maison.getPiece(0).getMur(0).getSortie(0), Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
         Bundle extras2 = new Bundle();

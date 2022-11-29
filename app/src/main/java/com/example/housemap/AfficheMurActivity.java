@@ -119,9 +119,9 @@ public class AfficheMurActivity extends AppCompatActivity {
                     maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
                     sortie = new Sortie(maison.getPiece(nomPiece),numSortie,x,y,x2,y2);
                     mur.ajouterSortie(sortie);
-                    maison.mettreAJourPiece(piece);
-                    piece.modifierMur(mur);
-                    Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+sortie.getNomPiece(), Toast.LENGTH_SHORT).show();
+                    pieceEnCours.modifierMur(mur);
+                    maison.mettreAJourPiece(pieceEnCours);
+                    Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+maison.getPiece(0).getMur(0).getSortie(0).getNomPiece(), Toast.LENGTH_SHORT).show();
 
                 }
             }

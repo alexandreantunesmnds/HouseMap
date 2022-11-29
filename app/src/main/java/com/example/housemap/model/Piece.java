@@ -1,5 +1,7 @@
 package com.example.housemap.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 public class Piece implements Serializable {
