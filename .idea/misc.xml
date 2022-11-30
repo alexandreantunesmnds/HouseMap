@@ -15,6 +15,8 @@
         <entry key="app/src/main/res/layout/activity_piece_en_cours.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_porte.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_piece.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19" />
       </map>
     </option>
   </component>
