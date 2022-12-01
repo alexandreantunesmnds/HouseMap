@@ -121,7 +121,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                     mur.ajouterSortie(sortie);
                     pieceEnCours.modifierMur(mur);
                     maison.mettreAJourPiece(pieceEnCours);
-                    Toast.makeText(AfficheMurActivity.this, "Le nom de la pièce sortie est "+maison.getPiece(0).getMur(0).getSortie(0).getNomPiece(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
 
                 }
             }

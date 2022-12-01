@@ -45,11 +45,13 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         nomPiece = findViewById(R.id.editTextTextNamePiece);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
-            //mur = (Mur) getIntent().getSerializableExtra("mur"); //on récupère le batiment créer
             piece = (Piece) getIntent().getSerializableExtra("piece");
-            setResult(RESULT_OK, getIntent());
+        }
+        if(piece==null){
+            piece = new Piece();
         }
         if(maison.getNbPieces()==0||!maison.pieceIsInBat(piece.getNom())) {
+            Toast.makeText(PieceEnCoursActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
             piece = new Piece();
             int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
@@ -196,20 +198,17 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         extras2.putSerializable("piece",piece);
         extras2.putSerializable("maison",maison);
         intent.putExtras(extras2);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,6); ;
     }
 
     public void clickValider(View view) {
-        if(maison.getNbPieces() !=0) {
-            Toast.makeText(PieceEnCoursActivity.this, "Le mur a une sortie vers :" + maison.getPiece(0).getMur(0).getSortie(0), Toast.LENGTH_SHORT).show();
-        }
         Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
         Bundle extras2 = new Bundle();
         extras2.putSerializable("maison",maison);
+        extras2.putSerializable("piece",piece);
         intent.putExtras(extras2);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
-        startActivityForResult(intent,3);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }

@@ -17,7 +17,6 @@ public class PorteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_porte);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison");
@@ -32,7 +31,6 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,7);
     }
 
@@ -44,7 +42,6 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,7);
     }
 
@@ -56,7 +53,6 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,7);
     }
 
@@ -68,7 +64,6 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
         startActivityForResult(intent,7);
     }
 

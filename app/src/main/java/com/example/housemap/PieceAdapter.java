@@ -46,13 +46,18 @@ public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHol
         ImageView img = holder.img_piece;
         FileInputStream fis;
         try {
-            fis = mContext.openFileInput(premMur.getNomPhoto());
+            if(premMur!=null) { //si une photo du mur existe
+                fis = mContext.openFileInput(premMur.getNomPhoto());
+                Bitmap bm = BitmapFactory.decodeStream(fis);
+                //Picasso.get().load(premMur.getNomPhoto()).into(holder.img_piece);
+                holder.img_piece.setImageBitmap(bm);
+            }
+            else{
+                holder.img_piece.setImageResource(R.drawable.icon_room);
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        //Picasso.get().load(premMur.getNomPhoto()).into(holder.img_piece);
-        holder.img_piece.setImageBitmap(bm);
     }
 
     @Override
