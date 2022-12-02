@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -36,6 +37,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private String nomPieceS;
     private EditText nomPiece;
     private Button ajout;
+    private Button ajoutPorte;
+    private Button valider;
     private Mur mur;
 
     @Override
@@ -50,18 +53,23 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         if(piece==null){
             piece = new Piece();
         }
-        if(maison.getNbPieces()==0||!maison.pieceIsInBat(piece.getNom())) {
-            Toast.makeText(PieceEnCoursActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+        if(maison.getNbPieces()==0||!maison.pieceIsInBat(piece.getNom())) { //si la piece n'est pas encore créer alors on la créer
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
-            piece = new Piece();
             int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
             piece.setNoPiece(numPiece);
             ajout = findViewById(R.id.button3);
+            ajoutPorte = findViewById(R.id.button10);
+            valider = findViewById(R.id.termine);
             ajout.setEnabled(false);
+            ajoutPorte.setEnabled(false);
+            valider.setEnabled(false);
+            ajout.setBackgroundColor(Color.GRAY);
+            ajoutPorte.setBackgroundColor(Color.GRAY);
+            valider.setBackgroundColor(Color.GRAY);
             maison.ajouterPiece(piece);
         }
         else{
-            Button valider = findViewById(R.id.button4);
+            Button valider = findViewById(R.id.button4); //on fait disparaître la saisie du nom de pièce si déjà effectuée
             valider.setEnabled(false);
             valider.setVisibility(View.INVISIBLE);
             nomPiece.setVisibility(View.INVISIBLE);
@@ -147,9 +155,14 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(nbPrises==4){
-                //Toast.makeText(PieceEnCoursActivity.this, "La pièce a été ajoutée au batiment, taille bat "+this.maison.getNbPieces(), Toast.LENGTH_SHORT).show();
                 //this.sauvegarder();
-                //Toast.makeText(PieceEnCoursActivity.this, "Votre pièce a été créée", Toast.LENGTH_SHORT).show();
+                ajoutPorte.setEnabled(true);
+                valider.setEnabled(true);
+                ajout.setEnabled(false);
+                ajout.setVisibility(View.INVISIBLE); //on fait disparaître le bouton si les 4photos sont prises
+                valider.setBackgroundColor(Color.parseColor("#7CB342"));
+                ajoutPorte.setBackgroundColor(Color.parseColor("#CCFF90"));
+                Toast.makeText(PieceEnCoursActivity.this, "Vous pouvez désormais ajouter des portes à la pièce ou valider la pièce", Toast.LENGTH_SHORT).show();
             }
         }
         // check that it is the SecondActivity with an OK result
@@ -164,6 +177,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             ajout.setEnabled(true);
+            ajout.setBackgroundColor(Color.parseColor("#0097A7"));
             nomPieceS = nomPiece.getText().toString();
             FILE_NAME = nomPieceS;
             piece.setNom(nomPieceS);
@@ -183,8 +197,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             this.maison.retirerPiece(this.piece);
         }
         Intent intent = new Intent(PieceEnCoursActivity.this, ConstructionActivity.class);
-        startActivity(intent) ;
-        Toast.makeText(PieceEnCoursActivity.this, "Vous avez annulé la saisie d'une pièce", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 
     public void clickBoussole(View view) {

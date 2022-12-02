@@ -12,10 +12,11 @@
     <Switch
             android:text="@string/capteurs"
             android:onClick="clickCapteur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/switchCapt"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="108dp"
+            android:layout_width="182dp"
+            android:layout_height="82dp" android:id="@+id/switchCapt"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="116dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="162dp" android:minHeight="48dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" android:layout_marginEnd="146dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" android:textColor="#FFFFFF" android:textSize="24sp"
+            app:layout_constraintHorizontal_bias="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

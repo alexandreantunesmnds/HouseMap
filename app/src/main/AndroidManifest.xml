@@ -26,16 +26,10 @@
                 android:name=".CapteursActivity"
                 android:exported="false"/>
         <activity
-                android:name=".AjoutMurActivity"
-                android:exported="false"/>
-        <activity
                 android:name=".PieceEnCoursActivity"
                 android:exported="false"/>
         <activity
                 android:name=".ConsultPieceActvity"
-                android:exported="false"/>
-        <activity
-                android:name=".AjouterPieceActivity"
                 android:exported="false"/>
         <activity
                 android:name=".ConstructionActivity"

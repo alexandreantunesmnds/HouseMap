@@ -65,6 +65,10 @@ public class ConstructionActivity extends AppCompatActivity {
                 Toast.makeText(ConstructionActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
 
             }
+            else if (resultCode == RESULT_CANCELED) {
+                //on ne fait rien si annulé
+                Toast.makeText(ConstructionActivity.this, "Vous avez annulé la saisie d'une pièce", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
