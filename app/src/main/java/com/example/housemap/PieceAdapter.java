@@ -1,7 +1,6 @@
 package com.example.housemap;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.housemap.model.Mur;
 import com.example.housemap.model.Piece;
-import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,12 +69,12 @@ public class PieceAdapter extends RecyclerView.Adapter<PieceAdapter.PieceViewHol
     }
 
     public class PieceViewHolder extends RecyclerView.ViewHolder {
-        TextView name_piece,phone_piece;
+        TextView name_piece;
         CircleImageView img_piece;
 
         public PieceViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            name_piece = itemView.findViewById(R.id.name_piece);
+            name_piece = itemView.findViewById(R.id.name_porte);
             img_piece = itemView.findViewById(R.id.img_piece);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

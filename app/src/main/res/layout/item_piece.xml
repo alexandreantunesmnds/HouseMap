@@ -3,20 +3,23 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content">
+                                                   android:layout_height="wrap_content"
+                                                   android:backgroundTint="#FFFFFF" android:background="#FFFFFF">
 
     <TextView
             android:text="TextView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:id="@+id/name_piece"
+            android:layout_height="wrap_content" android:id="@+id/name_porte"
             android:textStyle="bold" app:layout_constraintTop_toTopOf="@+id/img_piece"
             app:layout_constraintStart_toEndOf="@+id/img_piece" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"/>
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp" android:background="#FFFFFF"
+            android:textSize="16sp"/>
     <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="56dp"
             android:layout_height="56dp" android:id="@+id/img_piece"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="16dp" android:layout_marginBottom="16dp" app:srcCompat="@drawable/icon_room"/>
+            android:layout_marginTop="16dp" android:layout_marginBottom="16dp" app:srcCompat="@drawable/icon_room"
+            android:background="#FFFFFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

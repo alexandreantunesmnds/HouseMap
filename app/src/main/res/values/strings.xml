@@ -18,4 +18,7 @@
     <string name="ajouter_porte">ajouter porte</string>
     <string name="Valider">valider</string>
     <string name="todo">TODO</string>
+    <string name="reprendre_mur">Reprendre Mur</string>
+    <string name="modifier_porte">Modifier porte</string>
+    <string name="supprimer_piece">supprimer piece</string>
 </resources>

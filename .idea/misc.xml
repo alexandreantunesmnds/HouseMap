@@ -12,10 +12,13 @@
         <entry key="app/src/main/res/layout/activity_changer.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_construction.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/layout/activity_consult_piece_actvity.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/activity_consult_portes.xml" value="0.28003420265070544" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_modif_house.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_piece_en_cours.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_porte.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_piece.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_piece.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_porte.xml" value="0.67" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19" />
       </map>
