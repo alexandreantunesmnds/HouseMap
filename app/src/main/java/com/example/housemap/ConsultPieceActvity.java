@@ -48,16 +48,6 @@ public class ConsultPieceActvity extends AppCompatActivity implements RecyclerVi
         //printPieces();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            maison = (Batiment) extras.get("maison");
-            pieceList = maison.getListPieces();
-            Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
 
     @SuppressLint("NotifyDataSetChanged")
     private void getPieces() {
@@ -67,6 +57,25 @@ public class ConsultPieceActvity extends AppCompatActivity implements RecyclerVi
     @Override
     public void OnItemClick(int position) {
         Intent intent = new Intent(this, ChangerActivity.class) ;
-        startActivity(intent); //TODO:https://www.google.com/search?channel=fs&client=ubuntu&q=click+on+item+recyclerview#fpstate=ive&vld=cid:fe26e79c,vid:7GPUpvcU1FE
+        Piece pieceChoisie = pieceList.get(position);
+        intent.putExtra("maison",maison);
+        intent.putExtra("piece",pieceChoisie);
+        startActivityForResult(intent,10);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 10) {
+            if (resultCode == RESULT_OK) {
+                //Toast.makeText(ConsultPieceActvity.this, "nb pieces : "+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+                maison = (Batiment) data.getSerializableExtra("maison");
+                pieceList = maison.getListPieces();
+                adapter = new PieceAdapter(this,pieceList,this);
+                recyclerView.setAdapter(adapter);
+                this.getPieces();
+            }
+        }
     }
 }

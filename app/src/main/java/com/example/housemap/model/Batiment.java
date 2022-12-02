@@ -20,7 +20,11 @@ public class Batiment implements Serializable {
     }
 
     public void retirerPiece(Piece piece){
-        listPieces.remove(piece);
+        for(int i =0;i<listPieces.size();i++){
+            if(piece.getNoPiece()==listPieces.get(i).getNoPiece()){
+                listPieces.remove(i);
+            }
+        }
     }
 
     public int getNbPieces(){
