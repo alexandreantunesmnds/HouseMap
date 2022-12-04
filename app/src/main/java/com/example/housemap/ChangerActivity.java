@@ -42,7 +42,12 @@ public class ChangerActivity extends AppCompatActivity {
         if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
             nomPieceS = nomPiece.getText().toString();
             piece.setNom(nomPieceS);
+            maison.mettreAJourPiece(piece);
             Toast.makeText(ChangerActivity.this, "Nom de la pièce modifié avec succès", Toast.LENGTH_SHORT).show();
+            Button valider = findViewById(R.id.buttonValide);
+            valider.setEnabled(false);
+            valider.setVisibility(View.INVISIBLE);
+            nomPiece.setVisibility(View.INVISIBLE);
         }
         else{
             Toast.makeText(ChangerActivity.this, "Veuillez saisir un nom valide", Toast.LENGTH_SHORT).show();
@@ -50,6 +55,13 @@ public class ChangerActivity extends AppCompatActivity {
     }
 
     public void clickValider(View view) {
+        Intent intent = new Intent(ChangerActivity.this, ConsultPieceActvity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("maison",maison);
+        extras2.putSerializable("piece",piece);
+        intent.putExtras(extras2);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public void clickNord(View view) {

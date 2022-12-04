@@ -26,6 +26,7 @@
             android:backgroundTint="#FFE57F" android:textColor="#212121"/>
     <Button
             android:text="@string/Valider"
+            android:onClick="clickValider"
             android:layout_width="180dp"
             android:layout_height="52dp" android:id="@+id/termine3"
             app:iconTint="#E91E63" android:backgroundTint="#7CB342" android:textColor="#4E342E"
@@ -34,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="456dp"/>
     <Button
             android:text="@string/reprendre_mur"
+            android:onClick="clickAjoutMur"
             android:layout_width="180dp"
             android:layout_height="52dp" android:id="@+id/button17"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="118dp"
