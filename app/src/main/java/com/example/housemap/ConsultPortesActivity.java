@@ -1,5 +1,6 @@
 package com.example.housemap;
 
+import android.content.Intent;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,10 @@ public class ConsultPortesActivity extends AppCompatActivity implements Recycler
 
     @Override
     public void OnItemClick(int position) {
-
+        Intent intent = new Intent(this, ChangerActivity.class) ;
+        Sortie porteChoisie = sortiesList.get(position);
+        intent.putExtra("maison",maison);
+        intent.putExtra("piece",porteChoisie);
+        startActivityForResult(intent,15);
     }
 }

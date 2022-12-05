@@ -14,6 +14,9 @@
             android:theme="@style/Theme.HouseMap"
             tools:targetApi="31">
         <activity
+                android:name=".ModifPorteActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".ConsultPortesActivity"
                 android:exported="false"/>
         <activity

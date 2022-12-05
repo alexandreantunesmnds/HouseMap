@@ -21,4 +21,7 @@
     <string name="reprendre_mur">Reprendre Mur</string>
     <string name="modifier_porte">Modifier porte</string>
     <string name="supprimer_piece">supprimer piece</string>
+    <string name="changer_porte">changer porte</string>
+    <string name="supprimer_porte">supprimer porte</string>
+    <string name="modifier_nom_sortie">Modifier nom sortie</string>
 </resources>
