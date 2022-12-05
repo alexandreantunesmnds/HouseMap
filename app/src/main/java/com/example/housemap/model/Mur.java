@@ -33,6 +33,10 @@ public class Mur implements Serializable {
         return listSorties.get(index);
     }
 
+    public List<Sortie> getListSorties() {
+        return listSorties;
+    }
+
     public void setNoPiece(int noPiece) {
         this.noMur = noPiece;
     }

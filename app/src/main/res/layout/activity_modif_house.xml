@@ -10,6 +10,7 @@
 
     <Button
             android:text="@string/ajouter_porte"
+            android:onClick="clickAjoutPorte"
             android:layout_width="180dp"
             android:layout_height="52dp" android:id="@+id/button16"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="118dp"
@@ -18,6 +19,7 @@
             android:backgroundTint="#CCFF90" android:textColor="#212121"/>
     <Button
             android:text="@string/modifier_porte"
+            android:onClick="clickModifPorte"
             android:layout_width="180dp"
             android:layout_height="52dp" android:id="@+id/button19"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="118dp"

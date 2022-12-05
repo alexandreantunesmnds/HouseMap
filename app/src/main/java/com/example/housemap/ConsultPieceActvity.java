@@ -2,11 +2,6 @@ package com.example.housemap;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.housemap.model.Batiment;
 import com.example.housemap.model.Piece;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +28,7 @@ public class ConsultPieceActvity extends AppCompatActivity implements RecyclerVi
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
-        recyclerView = findViewById(R.id.piece_recycler);
+        recyclerView = findViewById(R.id.porte_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pieceList = new ArrayList<>();

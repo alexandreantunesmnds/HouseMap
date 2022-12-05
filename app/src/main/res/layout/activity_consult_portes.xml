@@ -7,7 +7,7 @@
 >
 
     <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent" android:layout_height="match_parent"
-                                               android:id="@+id/piece_recycler" tools:layout_editor_absoluteY="72dp"
+                                               android:id="@+id/porte_recycler" tools:layout_editor_absoluteY="72dp"
                                                tools:layout_editor_absoluteX="124dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

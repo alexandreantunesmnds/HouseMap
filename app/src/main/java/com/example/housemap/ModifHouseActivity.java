@@ -24,6 +24,8 @@ public class ModifHouseActivity extends AppCompatActivity {
     private Batiment maison;
     private Piece piece;
     private Mur mur;
+    private int nbPrises;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,16 @@ public class ModifHouseActivity extends AppCompatActivity {
             FileInputStream fis;
             try {
                 ImageView img = new ImageView(this);
-                String nameFile = piece.getNom() + mur.getNoMur() + ".data";
+                String nameFile;
+                if(mur!=null) {
+                    nameFile = piece.getNom() + mur.getNoMur() + ".data"; //si le mur existe déjà
+                }
+                else{
+                    nameFile = piece.getNom()+nbPrises+".data";
+                    mur = new Mur(nbPrises,nameFile);
+                    this.piece.ajouterMur(mur);
+                    nbPrises++;
+                }
                 fos = openFileOutput(nameFile, MODE_PRIVATE);
                 fis = openFileInput(nameFile);
                 Bitmap bm = BitmapFactory.decodeStream(fis);
@@ -70,6 +81,15 @@ public class ModifHouseActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 6) {
+            if (resultCode == RESULT_OK) {//mise à jour de la maison et de la piece
+                Batiment maison = (Batiment) data.getSerializableExtra("maison");
+                Piece piece = (Piece) data.getSerializableExtra("piece");
+                this.maison = maison;
+                this.piece = piece;
+            }
+        }
     }
 
     public void clickValider(View view) {
@@ -80,5 +100,25 @@ public class ModifHouseActivity extends AppCompatActivity {
         intent.putExtras(extras2);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    public void clickAjoutPorte(View view) {
+            Intent intent = new Intent(ModifHouseActivity.this, AfficheMurActivity.class);
+            Bundle extras2 = new Bundle();
+            extras2.putSerializable("piece",piece);
+            extras2.putSerializable("maison",maison);
+            extras2.putSerializable("mur",mur);
+            intent.putExtras(extras2);
+            startActivityForResult(intent,6);
+    }
+
+    public void clickModifPorte(View view) {
+        Intent intent = new Intent(ModifHouseActivity.this, ConsultPortesActivity.class);
+        Bundle extras2 = new Bundle();
+        extras2.putSerializable("piece",piece);
+        extras2.putSerializable("maison",maison);
+        extras2.putSerializable("mur",mur);
+        intent.putExtras(extras2);
+        startActivityForResult(intent,6);
     }
 }
