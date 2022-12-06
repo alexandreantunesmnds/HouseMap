@@ -40,15 +40,22 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     private Button ajoutPorte;
     private Button valider;
     private Mur mur;
+    private int init;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piece_en_cours);
         nomPiece = findViewById(R.id.editTextTextNamePiece);
+        ajout = findViewById(R.id.button3);
+        ajoutPorte = findViewById(R.id.button10);
+        valider = findViewById(R.id.termine);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
             piece = (Piece) getIntent().getSerializableExtra("piece");
+            if(getIntent().getSerializableExtra("init") != null) {
+                init = (int) getIntent().getSerializableExtra("init");
+            }
         }
         if(piece==null){
             piece = new Piece();
@@ -57,9 +64,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
             int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
             piece.setNoPiece(numPiece);
-            ajout = findViewById(R.id.button3);
-            ajoutPorte = findViewById(R.id.button10);
-            valider = findViewById(R.id.termine);
             ajout.setEnabled(false);
             ajoutPorte.setEnabled(false);
             valider.setEnabled(false);
@@ -69,6 +73,9 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             maison.ajouterPiece(piece);
         }
         else{
+            if(piece.getNom()!=null) {
+                nomPieceS = piece.getNom();
+            }
             Button valider = findViewById(R.id.button4); //on fait disparaître la saisie du nom de pièce si déjà effectuée
             valider.setEnabled(false);
             valider.setVisibility(View.INVISIBLE);
@@ -162,7 +169,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 ajout.setVisibility(View.INVISIBLE); //on fait disparaître le bouton si les 4photos sont prises
                 valider.setBackgroundColor(Color.parseColor("#7CB342"));
                 ajoutPorte.setBackgroundColor(Color.parseColor("#CCFF90"));
-                Toast.makeText(PieceEnCoursActivity.this, "Vous pouvez désormais ajouter des portes à la pièce ou valider la pièce", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PieceEnCoursActivity.this, "Voici votre nom de photo : "+ this.piece.getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PieceEnCoursActivity.this, "Vous pouvez désormais ajouter des portes à la pièce ou valider la pièce", Toast.LENGTH_SHORT).show();
             }
         }
         // check that it is the SecondActivity with an OK result

@@ -25,9 +25,16 @@ public class ChangerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_changer);
         nomPiece = findViewById(R.id.editTextTextNamePiece3);
         initial = findViewById(R.id.termine7);
+        initial.setEnabled(false);
+        initial.setVisibility(View.INVISIBLE);
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+        }
+        if(piece.getMur(0)==null){
+            initial.setVisibility(View.VISIBLE);
+            initial.setEnabled(true);
+            Toast.makeText(ChangerActivity.this, "Vous pouvez initialiser cette pièce vide ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -122,5 +129,26 @@ public class ChangerActivity extends AppCompatActivity {
                 this.piece = piece;
             }
         }
+        if (requestCode == 18) {
+            if (resultCode == RESULT_OK) {//mise à jour de la maison et de la piece
+                Batiment maison = (Batiment) data.getSerializableExtra("maison");
+                Piece piece = (Piece) data.getSerializableExtra("piece");
+                this.maison = maison;
+                this.piece = piece;
+                Toast.makeText(ChangerActivity.this, "Voici votre nom de photo : "+ this.piece.getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
+
+    public void clickInitial(View view) {
+        Intent intent = new Intent(ChangerActivity.this, PieceEnCoursActivity.class);
+        Bundle extras = new Bundle();
+        extras.putSerializable("piece",piece);
+        extras.putSerializable("maison",maison);
+        extras.putSerializable("init",1);
+        intent.putExtras(extras);
+        startActivityForResult(intent,18);
+
+    }
+
 }

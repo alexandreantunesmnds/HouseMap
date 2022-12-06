@@ -24,4 +24,5 @@
     <string name="changer_porte">changer porte</string>
     <string name="supprimer_porte">supprimer porte</string>
     <string name="modifier_nom_sortie">Modifier nom sortie</string>
+    <string name="initialiser_piece">Initialiser Piece</string>
 </resources>
