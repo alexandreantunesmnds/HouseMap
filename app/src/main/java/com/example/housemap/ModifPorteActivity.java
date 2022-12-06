@@ -30,9 +30,10 @@ public class ModifPorteActivity extends AppCompatActivity {
     public void clickChangerPorte(View view) {
         Intent intent = new Intent(this, AfficheMurActivity.class) ;
         intent.putExtra("maison",maison);
-        intent.putExtra("porte",porte);
+        intent.putExtra("sortie",porte);
         intent.putExtra("piece",piece);
         intent.putExtra("mur",mur);
+        intent.putExtra("changement",1);
         startActivityForResult(intent,16);
     }
 }

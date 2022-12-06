@@ -36,6 +36,7 @@ public class AfficheMurActivity extends AppCompatActivity {
     private String nomPiece;
     private Piece pieceEnCours;
     private Sortie sortie;
+    private int changement; //bool pour la condition si on désire faire un changement
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -49,6 +50,7 @@ public class AfficheMurActivity extends AppCompatActivity {
             pieceEnCours = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison");
             sortie = (Sortie) getIntent().getSerializableExtra("sortie");
+            changement = (int) getIntent().getSerializableExtra("changement");
             setResult(RESULT_OK, getIntent());
         }
         FileInputStream fis;
@@ -69,7 +71,15 @@ public class AfficheMurActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (rect != null) {
-                        coupeImage();
+                        if (changement==1){
+                            sortie.setCoord(x,y,x2,y2);
+                            mur.modifierSortie(sortie);
+                            pieceEnCours.modifierMur(mur);
+                            maison.mettreAJourPiece(pieceEnCours);
+                        }
+                        else {
+                            coupeImage();
+                        }
                     }
                 }
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -149,6 +159,7 @@ public class AfficheMurActivity extends AppCompatActivity {
 
                     ImageView rogView = new ImageView(this); //image récupéréé de la sortie
                     rogView.setImageBitmap(rog);
+                    couper.show();
 
                 } else {
                     Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();

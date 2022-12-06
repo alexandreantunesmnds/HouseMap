@@ -107,6 +107,7 @@ public class ModifHouseActivity extends AppCompatActivity {
             Bundle extras2 = new Bundle();
             extras2.putSerializable("piece",piece);
             extras2.putSerializable("maison",maison);
+            extras2.putSerializable("changement",0);
             extras2.putSerializable("mur",mur);
             intent.putExtras(extras2);
             startActivityForResult(intent,6);

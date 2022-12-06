@@ -30,6 +30,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("mur",est);
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
+        extras.putSerializable("changement",0);
         intent.putExtras(extras);
         startActivityForResult(intent,7);
     }
@@ -41,6 +42,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("mur",ouest);
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
+        extras.putSerializable("changement",0);
         intent.putExtras(extras);
         startActivityForResult(intent,7);
     }
@@ -52,6 +54,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("mur",nord);
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
+        extras.putSerializable("changement",0);
         intent.putExtras(extras);
         startActivityForResult(intent,7);
     }
@@ -63,6 +66,7 @@ public class PorteActivity extends AppCompatActivity {
         extras.putSerializable("mur",sud);
         extras.putSerializable("piece",piece);
         extras.putSerializable("maison",maison);
+        extras.putSerializable("changement",0);
         intent.putExtras(extras);
         startActivityForResult(intent,7);
     }

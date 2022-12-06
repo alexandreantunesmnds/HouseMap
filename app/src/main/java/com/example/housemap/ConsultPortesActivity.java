@@ -47,7 +47,7 @@ public class ConsultPortesActivity extends AppCompatActivity implements Recycler
         Intent intent = new Intent(this, ModifPorteActivity.class) ;
         Sortie porteChoisie = sortiesList.get(position);
         intent.putExtra("maison",maison);
-        intent.putExtra("porte",porteChoisie);
+        intent.putExtra("sortie",porteChoisie);
         intent.putExtra("piece",piece);
         intent.putExtra("mur",mur);
         startActivityForResult(intent,15);
