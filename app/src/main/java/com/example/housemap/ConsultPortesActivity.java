@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultPortesActivity extends AppCompatActivity implements RecyclerViewInterface {
-    Batiment maison;
-    Mur mur;
-    Piece piece;
-    RecyclerView recyclerView;
-    List<Sortie> sortiesList;
-    SortieAdapter adapter;
+    private Batiment maison;
+    private Mur mur;
+    private Piece piece;
+    private RecyclerView recyclerView;
+    private List<Sortie> sortiesList;
+    private SortieAdapter adapter;
 
 
     @Override
@@ -44,10 +44,12 @@ public class ConsultPortesActivity extends AppCompatActivity implements Recycler
 
     @Override
     public void OnItemClick(int position) {
-        Intent intent = new Intent(this, ChangerActivity.class) ;
+        Intent intent = new Intent(this, ModifPorteActivity.class) ;
         Sortie porteChoisie = sortiesList.get(position);
         intent.putExtra("maison",maison);
-        intent.putExtra("piece",porteChoisie);
+        intent.putExtra("porte",porteChoisie);
+        intent.putExtra("piece",piece);
+        intent.putExtra("mur",mur);
         startActivityForResult(intent,15);
     }
 }

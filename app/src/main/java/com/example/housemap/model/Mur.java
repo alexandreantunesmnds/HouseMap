@@ -36,6 +36,9 @@ public class Mur implements Serializable {
     public List<Sortie> getListSorties() {
         return listSorties;
     }
+    public void modifierSortie(Sortie sortie){
+        listSorties.set(sortie.getNoSortie(),sortie);
+    }
 
     public void setNoPiece(int noPiece) {
         this.noMur = noPiece;

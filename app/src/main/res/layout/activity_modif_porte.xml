@@ -10,7 +10,7 @@
 
     <Button
             android:text="@string/changer_porte"
-            android:onClick="clickAjoutPorte"
+            android:onClick="clickChangerPorte"
             android:layout_width="180dp"
             android:layout_height="52dp" android:id="@+id/button21"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="118dp"
