@@ -37,6 +37,7 @@ public class AfficheMurActivity extends AppCompatActivity {
     private Piece pieceEnCours;
     private Sortie sortie;
     private int changement; //bool pour la condition si on désire faire un changement
+    private AlertDialog.Builder couper;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -72,13 +73,14 @@ public class AfficheMurActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (rect != null) {
                         if (changement==1){
+                            coupeImageModif();
                             sortie.setCoord(x,y,x2,y2);
                             mur.modifierSortie(sortie);
                             pieceEnCours.modifierMur(mur);
                             maison.mettreAJourPiece(pieceEnCours);
                         }
                         else {
-                            coupeImage();
+                            coupeImageNonModif();
                         }
                     }
                 }
@@ -107,46 +109,10 @@ public class AfficheMurActivity extends AppCompatActivity {
         canvas.drawRect(rect, paint);
         holder.unlockCanvasAndPost(canvas);
     }
-    public void coupeImage() {
-        AlertDialog.Builder couper = new AlertDialog.Builder(this);
+    public void coupeImageNonModif() {
         BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
         Bitmap bmp = bmpDraw.getBitmap();
-        // Set an EditText view to get user input
-        final EditText input = new EditText(this);
-            couper.setView(input);
-
-            couper.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    nomPiece = String.valueOf(input.getText());
-                    int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
-                    if (maison.pieceIsInBat(nomPiece)) { //si la piece existe deja
-                        sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
-                        mur.ajouterSortie(sortie);
-                    } else {
-                        if (!String.valueOf(input.getText()).equals("")) {//si on a bien écrit quelque chose
-                            nomPiece = String.valueOf(input.getText());
-                            int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
-                            Piece piece = new Piece(nomPiece, numPiece);
-                            maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
-                            sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
-                            mur.ajouterSortie(sortie);
-                            pieceEnCours.modifierMur(mur);
-                            maison.mettreAJourPiece(pieceEnCours);
-                            Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
-                        } else {
-                            //Sinon on fait rien
-                        }
-
-                    }
-                }
-            });
-
-            couper.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    // Canceled
-                }
-            });
-
+        gererFenetre();
             Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
             if (x >= 0 && y >= 0) {
                 int x = (int) (rect.left - img.getX());
@@ -167,6 +133,72 @@ public class AfficheMurActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
             }
+
+    }
+
+    public void coupeImageModif() {
+        BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
+        Bitmap bmp = bmpDraw.getBitmap();
+        gererFenetre();
+        Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
+        if (x >= 0 && y >= 0) {
+            int x = (int) (rect.left - img.getX());
+            int y = (int) (rect.top - img.getX());
+            int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
+            int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
+
+            if (y + hauteur < redimension.getHeight()) {
+                Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
+
+                ImageView rogView = new ImageView(this); //image récupéréé de la sortie
+                rogView.setImageBitmap(rog);
+
+            } else {
+                Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    public void gererFenetre(){
+        couper = new AlertDialog.Builder(this);
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        couper.setView(input);
+
+        couper.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                nomPiece = String.valueOf(input.getText());
+                int numSortie = FabriqueNumero.getInstance().getNumeroSortie();
+                if (maison.pieceIsInBat(nomPiece)) { //si la piece existe deja
+                    sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
+                    mur.ajouterSortie(sortie);
+                } else {
+                    if (!String.valueOf(input.getText()).equals("")) {//si on a bien écrit quelque chose
+                        nomPiece = String.valueOf(input.getText());
+                        int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
+                        Piece piece = new Piece(nomPiece, numPiece);
+                        maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
+                        sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
+                        mur.ajouterSortie(sortie);
+                        pieceEnCours.modifierMur(mur);
+                        maison.mettreAJourPiece(pieceEnCours);
+                        Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Sinon on fait rien
+                    }
+
+                }
+            }
+        });
+
+        couper.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled
+            }
+        });
+
 
     }
 

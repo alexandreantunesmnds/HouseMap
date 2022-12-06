@@ -52,4 +52,23 @@ public class ConsultPortesActivity extends AppCompatActivity implements Recycler
         intent.putExtra("mur",mur);
         startActivityForResult(intent,15);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 15) {
+            if (resultCode == RESULT_OK) {//mise à jour de la maison et de la piece
+                Batiment maison = (Batiment) data.getSerializableExtra("maison");
+                Piece piece = (Piece) data.getSerializableExtra("piece");
+                this.maison = maison;
+                this.piece = piece;
+                Intent intent = new Intent(ConsultPortesActivity.this, ModifHouseActivity.class);
+                intent.putExtra("maison", maison);
+                intent.putExtra("piece", piece);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
+    }
 }

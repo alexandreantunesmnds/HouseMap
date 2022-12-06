@@ -1,7 +1,6 @@
 package com.example.housemap;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +16,7 @@ public class ChangerActivity extends AppCompatActivity {
     private Batiment maison;
     private EditText nomPiece;
     private String nomPieceS;
+    private Button initial;
 
 
     @Override
@@ -24,6 +24,7 @@ public class ChangerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changer);
         nomPiece = findViewById(R.id.editTextTextNamePiece3);
+        initial = findViewById(R.id.termine7);
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
@@ -31,7 +32,7 @@ public class ChangerActivity extends AppCompatActivity {
     }
 
     public void clickSupprimer(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ConsultPieceActvity.class);
+        Intent intent = new Intent(ChangerActivity.this, ConsultPieceActivity.class);
         maison.retirerPiece(piece);
         Toast.makeText(ChangerActivity.this, "nb pieces : "+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
         intent.putExtra("maison",maison);
@@ -55,7 +56,7 @@ public class ChangerActivity extends AppCompatActivity {
     }
 
     public void clickValider(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ConsultPieceActvity.class);
+        Intent intent = new Intent(ChangerActivity.this, ConsultPieceActivity.class);
         Bundle extras2 = new Bundle();
         extras2.putSerializable("maison",maison);
         extras2.putSerializable("piece",piece);

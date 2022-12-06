@@ -13,7 +13,7 @@ import com.example.housemap.model.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultPieceActvity extends AppCompatActivity implements RecyclerViewInterface{
+public class ConsultPieceActivity extends AppCompatActivity implements RecyclerViewInterface{
     private static final String FILE_NAME = "salon";
     RecyclerView recyclerView;
     List<Piece> pieceList;
@@ -36,7 +36,7 @@ public class ConsultPieceActvity extends AppCompatActivity implements RecyclerVi
         adapter = new PieceAdapter(this,pieceList,this);
         recyclerView.setAdapter(adapter);
         this.getPieces();
-        Toast.makeText(ConsultPieceActvity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(ConsultPieceActivity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
         //printPieces();
     }
 

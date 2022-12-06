@@ -38,7 +38,7 @@
                 android:name=".PieceEnCoursActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ConsultPieceActvity"
+                android:name=".ConsultPieceActivity"
                 android:exported="false"/>
         <activity
                 android:name=".ConstructionActivity"

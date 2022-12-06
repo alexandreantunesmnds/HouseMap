@@ -50,5 +50,8 @@ public class Mur implements Serializable {
     public void ajouterSortie(Sortie sortie){
         this.listSorties.add(sortie);
     }
+    public void supprimerPorte(Sortie porte){
+        this.listSorties.remove(porte.getNoSortie());
+    }
 
 }

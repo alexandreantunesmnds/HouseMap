@@ -24,6 +24,7 @@ public class Sortie implements Serializable {
         this.noSortie = noSortie;
     }
 
+
     public int getNoSortie() {
         return noSortie;
     }
@@ -33,5 +34,8 @@ public class Sortie implements Serializable {
         this.y = y;
         this.x2 = x2;
         this.y2 = y2;
+    }
+    public void setNomSortie(String nomSortie){
+        piece.setNom(nomSortie);
     }
 }
