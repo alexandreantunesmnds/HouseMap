@@ -27,6 +27,10 @@ public class Batiment implements Serializable {
         }
     }
 
+    public String getNomBat() {
+        return nomBat;
+    }
+
     public int getNbPieces(){
         return listPieces.size();
     }

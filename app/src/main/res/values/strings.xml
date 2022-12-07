@@ -25,4 +25,6 @@
     <string name="supprimer_porte">supprimer porte</string>
     <string name="modifier_nom_sortie">Modifier nom sortie</string>
     <string name="initialiser_piece">Initialiser Piece</string>
+    <string name="sauvegarder">sauvegarder</string>
+    <string name="charger">charger</string>
 </resources>
