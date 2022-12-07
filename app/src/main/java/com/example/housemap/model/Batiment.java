@@ -9,7 +9,7 @@ public class Batiment implements Serializable {
     private String nomBat;
     private List<Piece> listPieces;
     public Batiment() {
-        nomBat = "Batiment 1";
+        nomBat = "appart";
         listPieces = new ArrayList<>(10);
     }
     public void ajouterPiece(Piece piece){
@@ -56,5 +56,8 @@ public class Batiment implements Serializable {
             }
         }
         return null;
+    }
+    public void supprimerTout(){
+        this.listPieces.clear();
     }
 }

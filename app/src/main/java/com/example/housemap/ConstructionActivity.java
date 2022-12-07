@@ -41,7 +41,7 @@ public class ConstructionActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        startActivityForResult(intent,2);
+        startActivityForResult(intent,3);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -52,19 +52,7 @@ public class ConstructionActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
                 Toast.makeText(ConstructionActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ConstructionActivity.this, MainActivity.class);
-                Bundle extras2 = new Bundle();
-                extras2.putSerializable("maison",maison);
-                intent.putExtras(extras2);
-                Sauvegarde save = Sauvegarde.getInstance();
-                save.saveProject(maison,this);
-                setResult(RESULT_OK, intent);
-                finish();
 
-            }
-            else if (resultCode == RESULT_CANCELED) {
-                //on ne fait rien si annulé
-                Toast.makeText(ConstructionActivity.this, "Vous avez annulé la saisie d'une pièce", Toast.LENGTH_SHORT).show();
             }
         }
     }

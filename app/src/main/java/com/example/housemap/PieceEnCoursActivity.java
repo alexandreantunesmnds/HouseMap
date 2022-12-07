@@ -229,6 +229,8 @@ public class PieceEnCoursActivity extends AppCompatActivity {
         extras2.putSerializable("maison",maison);
         extras2.putSerializable("piece",piece);
         intent.putExtras(extras2);
+        Sauvegarde save = Sauvegarde.getInstance();
+        save.saveProject(maison,this);
         setResult(RESULT_OK, intent);
         finish();
     }

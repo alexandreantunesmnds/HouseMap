@@ -2,5 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/sauvegarder" android:id="@+id/sauv_menu"/>
     <item android:title="@string/charger" android:id="@+id/charge_menu"/>
+    <item android:title="@string/supprimer_tout" android:id="@+id/supprime_menu"/>
 
 </menu>

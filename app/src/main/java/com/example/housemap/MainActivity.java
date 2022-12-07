@@ -10,6 +10,10 @@ import android.os.Bundle;
 import com.example.housemap.model.Batiment;
 import com.example.housemap.model.FabriqueNumero;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 public class MainActivity extends AppCompatActivity {
     private Batiment maison;
     private Sauvegarde save;
@@ -17,8 +21,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        maison = new Batiment();
         save = Sauvegarde.getInstance();
+        if(save.getProject("appart",this)!=null) {
+            maison = save.getProject("appart", this);
+        }
+        else{
+            maison = new Batiment();
+        }
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -30,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 save.saveProject(maison,this);
             case R.id.charge_menu:
                 maison = save.getProject("appart",this);
+            case R.id.supprime_menu:
+                save.deleteProjet(getDir("appart.ser",MODE_PRIVATE),"appart");
+                maison.supprimerTout();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -40,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        startActivityForResult(intent,20); ;
+        startActivity(intent);
     }
 
     public void clickVisu(View view) {
@@ -53,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 20) {
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
+            }
+            else if (resultCode == RESULT_CANCELED){
+
             }
         }
     }

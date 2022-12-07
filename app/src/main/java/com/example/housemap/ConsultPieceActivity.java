@@ -67,6 +67,14 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
                 adapter = new PieceAdapter(this,pieceList,this);
                 recyclerView.setAdapter(adapter);
                 this.getPieces();
+                Intent intent = new Intent(ConsultPieceActivity.this, ConstructionActivity.class);
+                Bundle extras2 = new Bundle();
+                extras2.putSerializable("maison",maison);
+                intent.putExtras(extras2);
+                Sauvegarde save = Sauvegarde.getInstance();
+                save.saveProject(maison,this);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }

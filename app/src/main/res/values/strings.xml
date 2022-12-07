@@ -27,4 +27,5 @@
     <string name="initialiser_piece">Initialiser Piece</string>
     <string name="sauvegarder">sauvegarder</string>
     <string name="charger">charger</string>
+    <string name="supprimer_tout">supprimer tout</string>
 </resources>
