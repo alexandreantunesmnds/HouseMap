@@ -40,9 +40,20 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        startActivity(intent) ;
+        startActivityForResult(intent,20); ;
     }
 
     public void clickVisu(View view) {
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 20) {
+            if (resultCode == RESULT_OK) {
+                maison = (Batiment) data.getSerializableExtra("maison");
+            }
+        }
     }
 }

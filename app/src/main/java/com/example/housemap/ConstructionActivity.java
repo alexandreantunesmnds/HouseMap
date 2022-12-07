@@ -52,6 +52,14 @@ public class ConstructionActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
                 Toast.makeText(ConstructionActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ConstructionActivity.this, MainActivity.class);
+                Bundle extras2 = new Bundle();
+                extras2.putSerializable("maison",maison);
+                intent.putExtras(extras2);
+                Sauvegarde save = Sauvegarde.getInstance();
+                save.saveProject(maison,this);
+                setResult(RESULT_OK, intent);
+                finish();
 
             }
             else if (resultCode == RESULT_CANCELED) {
