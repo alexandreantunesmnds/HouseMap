@@ -39,7 +39,6 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
         adapter = new PieceAdapter(this,pieceList,this);
         recyclerView.setAdapter(adapter);
         this.getPieces();
-        Toast.makeText(ConsultPieceActivity.this, "La pièce est :"+pieceList.get(0).getNom(), Toast.LENGTH_SHORT).show();
         //printPieces();
     }
 

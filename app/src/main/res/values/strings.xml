@@ -28,4 +28,6 @@
     <string name="sauvegarder">sauvegarder</string>
     <string name="charger">charger</string>
     <string name="supprimer_tout">supprimer tout</string>
+    <string name="suivant">Suivant</string>
+    <string name="pr_c_dent">Précédent</string>
 </resources>
