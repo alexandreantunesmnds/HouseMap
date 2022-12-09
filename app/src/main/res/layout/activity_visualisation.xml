@@ -16,6 +16,7 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="116dp"/>
     <Button
             android:text="@string/suivant"
+            android:onClick="clickSuivant"
             android:layout_width="133dp"
             android:layout_height="63dp" android:id="@+id/button24"
             android:layout_marginTop="56dp"
@@ -23,6 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
     <Button
             android:text="@string/pr_c_dent"
+            android:onClick="clickPrec"
             android:layout_width="133dp"
             android:layout_height="63dp" android:id="@+id/button20"
             android:layout_marginTop="56dp"
