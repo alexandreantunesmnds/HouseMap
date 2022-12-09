@@ -41,6 +41,7 @@ public class ConstructionActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ConsultPieceActivity.class);
             Bundle extras = new Bundle();
             extras.putSerializable("maison", maison);
+            extras.putSerializable("visualisation",0);
             intent.putExtras(extras);
             startActivityForResult(intent, 3);
         }

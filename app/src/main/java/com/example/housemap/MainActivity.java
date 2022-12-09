@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickVisu(View view) {
+        Intent intent = new Intent(MainActivity.this, ConsultPieceActivity.class) ;
+        Bundle extras = new Bundle();
+        extras.putSerializable("maison",maison);
+        extras.putSerializable("visualisation",1);
+        intent.putExtras(extras);
+        startActivity(intent);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -20,6 +20,7 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
     PieceAdapter adapter;
     Batiment maison;
     private final int RECYCL = 2;
+    private int visualisation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
         setContentView(R.layout.activity_consult_piece_actvity);
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+            visualisation = (int) getIntent().getSerializableExtra("visualisation"); //on récupère le batiment créer
+
         }
         recyclerView = findViewById(R.id.porte_recycler);
         recyclerView.setHasFixedSize(true);
@@ -48,11 +51,20 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
 
     @Override
     public void OnItemClick(int position) {
-        Intent intent = new Intent(this, ChangerActivity.class) ;
-        Piece pieceChoisie = pieceList.get(position);
-        intent.putExtra("maison",maison);
-        intent.putExtra("piece",pieceChoisie);
-        startActivityForResult(intent,10);
+        if(visualisation==0) {
+            Intent intent = new Intent(this, ChangerActivity.class);
+            Piece pieceChoisie = pieceList.get(position);
+            intent.putExtra("maison", maison);
+            intent.putExtra("piece", pieceChoisie);
+            startActivityForResult(intent, 10);
+        }
+        else{
+            Intent intent = new Intent(this, VisualisationActivity.class);
+            Piece pieceChoisie = pieceList.get(position);
+            intent.putExtra("maison", maison);
+            intent.putExtra("piece", pieceChoisie);
+            startActivity(intent);
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
