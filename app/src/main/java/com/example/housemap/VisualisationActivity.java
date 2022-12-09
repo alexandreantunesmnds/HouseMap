@@ -32,6 +32,7 @@ public class VisualisationActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             Bitmap bm = BitmapFactory.decodeStream(fis);
+            bm = Bitmap.createScaledBitmap(bm, 1000, 1000, false);
             // Reste à mettre bm à mettre sur l’ImageView
             img.setImageBitmap(bm);
         }
