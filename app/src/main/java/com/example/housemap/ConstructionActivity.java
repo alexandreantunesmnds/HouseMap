@@ -37,11 +37,16 @@ public class ConstructionActivity extends AppCompatActivity {
     }
 
     public void clickConsultPiece(View view) {
-        Intent intent = new Intent(this, ConsultPieceActivity.class) ;
-        Bundle extras = new Bundle();
-        extras.putSerializable("maison",maison);
-        intent.putExtras(extras);
-        startActivityForResult(intent,3);
+        if(!(maison.getNbPieces()==0)) {
+            Intent intent = new Intent(this, ConsultPieceActivity.class);
+            Bundle extras = new Bundle();
+            extras.putSerializable("maison", maison);
+            intent.putExtras(extras);
+            startActivityForResult(intent, 3);
+        }
+        else{
+            Toast.makeText(ConstructionActivity.this, "Vous n'avez aucune piece créées", Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

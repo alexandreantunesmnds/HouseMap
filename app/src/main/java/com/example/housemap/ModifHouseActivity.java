@@ -114,12 +114,17 @@ public class ModifHouseActivity extends AppCompatActivity {
     }
 
     public void clickModifPorte(View view) {
-        Intent intent = new Intent(ModifHouseActivity.this, ConsultPortesActivity.class);
-        Bundle extras2 = new Bundle();
-        extras2.putSerializable("piece",piece);
-        extras2.putSerializable("maison",maison);
-        extras2.putSerializable("mur",mur);
-        intent.putExtras(extras2);
-        startActivityForResult(intent,6);
+        if(mur.getListSorties().size()!=0) {
+            Intent intent = new Intent(ModifHouseActivity.this, ConsultPortesActivity.class);
+            Bundle extras2 = new Bundle();
+            extras2.putSerializable("piece", piece);
+            extras2.putSerializable("maison", maison);
+            extras2.putSerializable("mur", mur);
+            intent.putExtras(extras2);
+            startActivityForResult(intent, 6);
+        }
+        else{
+            Toast.makeText(this, "Vous n'avez aucune portes dans ce mur ", Toast.LENGTH_SHORT).show();
+        }
     }
 }

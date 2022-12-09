@@ -183,7 +183,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
     }
 
     public void clickValiderNom(View view) {
-        if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
+        if(!(nomPiece.getText().toString().equals(""))&&!maison.pieceIsInBat(nomPiece.getText().toString())){//si on a écrit quelque chose
             ajout.setEnabled(true);
             ajout.setBackgroundColor(Color.parseColor("#0097A7"));
             nomPieceS = nomPiece.getText().toString();
@@ -196,7 +196,7 @@ public class PieceEnCoursActivity extends AppCompatActivity {
             Toast.makeText(PieceEnCoursActivity.this, "Prenez la photo Nord", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir le nom de la pièce", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PieceEnCoursActivity.this, "Veuillez saisir un nom valide différent d'une pièce existante", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -47,7 +47,7 @@ public class ChangerActivity extends AppCompatActivity {
         finish();
     }
     public void clickValiderNom(View view) {
-        if(!(nomPiece.getText().toString().equals(""))){//si on a écrit quelque chose
+        if(!(nomPiece.getText().toString().equals(""))&&!maison.pieceIsInBat(nomPiece.getText().toString())){//si on a écrit quelque chose et si pièce pas dans le batiment
             nomPieceS = nomPiece.getText().toString();
             piece.setNom(nomPieceS);
             maison.mettreAJourPiece(piece);
@@ -58,7 +58,7 @@ public class ChangerActivity extends AppCompatActivity {
             nomPiece.setVisibility(View.INVISIBLE);
         }
         else{
-            Toast.makeText(ChangerActivity.this, "Veuillez saisir un nom valide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChangerActivity.this, "Veuillez saisir un nom valide différent d'une pièce existante", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -73,47 +73,55 @@ public class ChangerActivity extends AppCompatActivity {
     }
 
     public void clickNord(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
-        Bundle extras = new Bundle();
-        Mur nord = piece.getMur(0);
-        extras.putSerializable("mur",nord);
-        extras.putSerializable("piece",piece);
-        extras.putSerializable("maison",maison);
-        intent.putExtras(extras);
-        startActivityForResult(intent,12);
+        if(piece.getMur(0)!=null) {
+            Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
+            Bundle extras = new Bundle();
+            Mur nord = piece.getMur(0);
+            extras.putSerializable("mur", nord);
+            extras.putSerializable("piece", piece);
+            extras.putSerializable("maison", maison);
+            intent.putExtras(extras);
+            startActivityForResult(intent, 12);
+        }
     }
 
     public void clickOuest(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
-        Bundle extras = new Bundle();
-        Mur ouest = piece.getMur(3);
-        extras.putSerializable("mur",ouest);
-        extras.putSerializable("piece",piece);
-        extras.putSerializable("maison",maison);
-        intent.putExtras(extras);
-        startActivityForResult(intent,12);
+        if(piece.getMur(3)!=null) {
+            Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
+            Bundle extras = new Bundle();
+            Mur ouest = piece.getMur(3);
+            extras.putSerializable("mur", ouest);
+            extras.putSerializable("piece", piece);
+            extras.putSerializable("maison", maison);
+            intent.putExtras(extras);
+            startActivityForResult(intent, 12);
+        }
     }
 
     public void clickSud(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
-        Bundle extras = new Bundle();
-        Mur sud = piece.getMur(1);
-        extras.putSerializable("mur",sud);
-        extras.putSerializable("piece",piece);
-        extras.putSerializable("maison",maison);
-        intent.putExtras(extras);
-        startActivityForResult(intent,12);
+        if(piece.getMur(1)!=null) {
+            Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
+            Bundle extras = new Bundle();
+            Mur sud = piece.getMur(1);
+            extras.putSerializable("mur", sud);
+            extras.putSerializable("piece", piece);
+            extras.putSerializable("maison", maison);
+            intent.putExtras(extras);
+            startActivityForResult(intent, 12);
+        }
     }
 
     public void clickEst(View view) {
-        Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
-        Bundle extras = new Bundle();
-        Mur est = piece.getMur(2);
-        extras.putSerializable("mur",est);
-        extras.putSerializable("piece",piece);
-        extras.putSerializable("maison",maison);
-        intent.putExtras(extras);
-        startActivityForResult(intent,12);
+        if(piece.getMur(2)!=null) {
+            Intent intent = new Intent(ChangerActivity.this, ModifHouseActivity.class);
+            Bundle extras = new Bundle();
+            Mur est = piece.getMur(2);
+            extras.putSerializable("mur", est);
+            extras.putSerializable("piece", piece);
+            extras.putSerializable("maison", maison);
+            intent.putExtras(extras);
+            startActivityForResult(intent, 12);
+        }
     }
 
     @Override
