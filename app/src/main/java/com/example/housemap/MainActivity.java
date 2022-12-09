@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putSerializable("maison",maison);
         intent.putExtras(extras);
-        startActivity(intent);
+        startActivityForResult(intent,20);
     }
 
     public void clickVisu(View view) {
@@ -71,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 20) {
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
-            }
-            else if (resultCode == RESULT_CANCELED){
-
             }
         }
     }

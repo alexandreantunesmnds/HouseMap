@@ -52,13 +52,18 @@ public class ConstructionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // check that it is the SecondActivity with an OK result
         if (requestCode == 3) {
+            Sauvegarde save = Sauvegarde.getInstance();
+            save.saveProject(maison,this);
             if (resultCode == RESULT_OK) {
                 maison = (Batiment) data.getSerializableExtra("maison");
-                Toast.makeText(ConstructionActivity.this, "Nb pieces:"+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(this, MainActivity.class);
+                Bundle extras = new Bundle();
+                extras.putSerializable("maison", maison);
+                intent.putExtras(extras);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }
