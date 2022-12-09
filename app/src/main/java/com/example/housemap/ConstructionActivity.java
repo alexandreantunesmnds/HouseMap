@@ -24,7 +24,6 @@ public class ConstructionActivity extends AppCompatActivity {
         for(int i = 0;i<maison.getNbPieces();i++){
             Toast.makeText(ConstructionActivity.this, "La pièce est :"+maison.getPiece(i).getNom(), Toast.LENGTH_SHORT).show();
         }
-        setResult(RESULT_OK) ; // ou RESULT_CANCELED
     }
 
     @SuppressLint("QueryPermissionsNeeded")
