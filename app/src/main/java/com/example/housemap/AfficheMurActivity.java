@@ -7,10 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
+import android.view.*;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,8 +33,6 @@ public class AfficheMurActivity extends AppCompatActivity {
     private String nomPiece;
     private Piece pieceEnCours;
     private Sortie sortie;
-    private int changement; //bool pour la condition si on désire faire un changement
-    private AlertDialog.Builder couper;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -50,8 +45,6 @@ public class AfficheMurActivity extends AppCompatActivity {
             mur = (Mur) getIntent().getSerializableExtra("mur");
             pieceEnCours = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison");
-            sortie = (Sortie) getIntent().getSerializableExtra("sortie");
-            changement = (int) getIntent().getSerializableExtra("changement");
             setResult(RESULT_OK, getIntent());
         }
         FileInputStream fis;
@@ -72,16 +65,7 @@ public class AfficheMurActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (rect != null) {
-                        if (changement==1){
-                            coupeImageModif();
-                            sortie.setCoord(x,y,x2,y2);
-                            mur.modifierSortie(sortie);
-                            pieceEnCours.modifierMur(mur);
-                            maison.mettreAJourPiece(pieceEnCours);
-                        }
-                        else {
-                            coupeImageNonModif();
-                        }
+                        coupeImage();
                     }
                 }
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -109,60 +93,10 @@ public class AfficheMurActivity extends AppCompatActivity {
         canvas.drawRect(rect, paint);
         holder.unlockCanvasAndPost(canvas);
     }
-    public void coupeImageNonModif() {
+    public void coupeImage() {
+        AlertDialog.Builder couper = new AlertDialog.Builder(this);
         BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
         Bitmap bmp = bmpDraw.getBitmap();
-        gererFenetre();
-            Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
-            if (x >= 0 && y >= 0) {
-                int x = (int) (rect.left - img.getX());
-                int y = (int) (rect.top - img.getX());
-                int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
-                int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
-
-                if (y + hauteur < redimension.getHeight()) {
-                    Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
-
-                    ImageView rogView = new ImageView(this); //image récupéréé de la sortie
-                    rogView.setImageBitmap(rog);
-                    couper.show();
-
-                } else {
-                    Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
-            }
-
-    }
-
-    public void coupeImageModif() {
-        BitmapDrawable bmpDraw = (BitmapDrawable) img.getDrawable();
-        Bitmap bmp = bmpDraw.getBitmap();
-        gererFenetre();
-        Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
-        if (x >= 0 && y >= 0) {
-            int x = (int) (rect.left - img.getX());
-            int y = (int) (rect.top - img.getX());
-            int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
-            int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
-
-            if (y + hauteur < redimension.getHeight()) {
-                Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
-
-                ImageView rogView = new ImageView(this); //image récupéréé de la sortie
-                rogView.setImageBitmap(rog);
-
-            } else {
-                Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    public void gererFenetre(){
-        couper = new AlertDialog.Builder(this);
         // Set an EditText view to get user input
         final EditText input = new EditText(this);
         couper.setView(input);
@@ -184,20 +118,40 @@ public class AfficheMurActivity extends AppCompatActivity {
                         mur.ajouterSortie(sortie);
                         pieceEnCours.modifierMur(mur);
                         maison.mettreAJourPiece(pieceEnCours);
-                        Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
                     } else {
                         //Sinon on fait rien
                     }
 
                 }
             }
-        });
+            });
 
         couper.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Canceled
             }
         });
+
+        Bitmap redimension = Bitmap.createScaledBitmap(bmp, img.getWidth(), img.getHeight(), false);
+        if (x >= 0 && y >= 0) {
+            int x = (int) (rect.left - img.getX());
+            int y = (int) (rect.top - img.getX());
+            int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
+            int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
+
+            if (y + hauteur < redimension.getHeight()) {
+                Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
+
+                ImageView rogView = new ImageView(this); //image récupéréé de la sortie
+                rogView.setImageBitmap(rog);
+                couper.show();
+
+            } else {
+                Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Veuillez sélectionner une zone à l'intérieure de l'image", Toast.LENGTH_SHORT).show();
+        }
 
 
     }

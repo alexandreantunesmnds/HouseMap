@@ -17,12 +17,12 @@
             android:layout_marginStart="36dp" android:contentDescription="@string/todo"
             android:layout_marginEnd="39dp" app:layout_constraintEnd_toEndOf="parent"/>
     <SurfaceView
-            android:layout_width="336dp"
+            android:layout_width="257dp"
             android:layout_height="312dp" android:id="@+id/surfaceView"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="152dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="36dp" android:layout_marginEnd="39dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.375"/>
     <Button
             android:text="@string/Valider"
             android:onClick="clickValider"
