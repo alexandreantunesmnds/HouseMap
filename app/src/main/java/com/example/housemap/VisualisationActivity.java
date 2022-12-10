@@ -43,13 +43,9 @@ public class VisualisationActivity extends AppCompatActivity {
                 int x = (int) event.getX(); // récupérer la coordonnée x du clic
                 int y = (int) event.getY(); // récupérer la coordonnée y du clic
                 Mur mur = piece.getMur(0);
-                Toast.makeText(view.getContext(), "Vous avez cliquer y :"+y, Toast.LENGTH_SHORT).show();
                     if((mur.getListSorties().size())!=0){
                         for(int i = 0;i<mur.getListSorties().size();i++){
                             Rect rect = mur.getSortie(0).getRect();
-                            Toast.makeText(view.getContext(), "rect x : "+mur.getSortie(0).getX(), Toast.LENGTH_SHORT).show();
-
-
                             if(rect != null) {
                                 if (rect.contains(x, y)) {
                                     // faire quelque chose si le clic se trouve à l'intérieur du Rect
