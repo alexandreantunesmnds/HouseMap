@@ -46,6 +46,7 @@ public class VisualisationActivity extends AppCompatActivity {
                 Mur mur = piece.getMur(0);
                     if((mur.getListSorties().size())!=0){
                         for(int i = 0;i<mur.getListSorties().size();i++){
+                            Toast.makeText(view.getContext(), "sortie:"+mur.getSortie(i).getNomPiece(), Toast.LENGTH_SHORT).show();
                             Rect rect = mur.getSortie(i).getRect();
                             if(rect != null) {
                                 if (rect.contains(x, y)) {
@@ -93,17 +94,23 @@ public class VisualisationActivity extends AppCompatActivity {
         }
         else{
             i=0;
+            afficheImage(i);
         }
+        Toast.makeText(view.getContext(), "i vaut "+ i, Toast.LENGTH_SHORT).show();
     }
 
     public void clickPrec(View view) {//a revoir cette fonction
-        if(i>0) {
-            i--;
+        i--;
+        if(i<0) {
+            i=3;
             afficheImage(i);
         }
         else{
-            i=0;
+            afficheImage(i);
         }
+        Toast.makeText(view.getContext(), "i vaut "+ i, Toast.LENGTH_SHORT).show();
+
+
     }
 
 
