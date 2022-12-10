@@ -108,6 +108,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                 if (maison.pieceIsInBat(nomPiece)) { //si la piece existe deja
                     sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
                     mur.ajouterSortie(sortie);
+                    Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!String.valueOf(input.getText()).equals("")) {//si on a bien écrit quelque chose
                         nomPiece = String.valueOf(input.getText());
@@ -118,6 +119,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                         mur.ajouterSortie(sortie);
                         pieceEnCours.modifierMur(mur);
                         maison.mettreAJourPiece(pieceEnCours);
+                        Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
                     } else {
                         //Sinon on fait rien
                     }

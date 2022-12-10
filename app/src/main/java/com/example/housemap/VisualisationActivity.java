@@ -1,6 +1,7 @@
 package com.example.housemap;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -45,11 +46,18 @@ public class VisualisationActivity extends AppCompatActivity {
                 Mur mur = piece.getMur(0);
                     if((mur.getListSorties().size())!=0){
                         for(int i = 0;i<mur.getListSorties().size();i++){
-                            Rect rect = mur.getSortie(0).getRect();
+                            Rect rect = mur.getSortie(i).getRect();
                             if(rect != null) {
                                 if (rect.contains(x, y)) {
                                     // faire quelque chose si le clic se trouve à l'intérieur du Rect
                                     Toast.makeText(view.getContext(), "Vous avez cliquer dans le Rect !!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(VisualisationActivity.this, VisualisationActivity.class);
+                                    Bundle extras2 = new Bundle();
+                                    extras2.putSerializable("maison",maison);
+                                    extras2.putSerializable("piece",maison.getPiece(mur.getSortie(i).getNomPiece()));
+                                    intent.putExtras(extras2);
+                                    finish();
+                                    startActivity(intent);
                                 } else {
                                     // faire quelque chose si le clic se trouve à l'extérieur du Rect
                                     //Toast.makeText(this, "Vous avez cliquer hors Rect !!", Toast.LENGTH_SHORT).show();
