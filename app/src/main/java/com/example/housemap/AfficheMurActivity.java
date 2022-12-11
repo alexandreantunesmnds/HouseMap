@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.*;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class AfficheMurActivity extends AppCompatActivity {
     private String nomPiece;
     private Piece pieceEnCours;
     private Sortie sortie;
+    private TextView textNom;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -109,6 +111,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                     sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
                     mur.ajouterSortie(sortie);
                     pieceEnCours.modifierMur(mur);
+                    maison.mettreAJourPiece(pieceEnCours);
                     Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!String.valueOf(input.getText()).equals("")) {//si on a bien écrit quelque chose

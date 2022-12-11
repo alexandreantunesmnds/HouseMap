@@ -30,4 +30,5 @@
     <string name="supprimer_tout">supprimer tout</string>
     <string name="suivant">Suivant</string>
     <string name="pr_c_dent">Précédent</string>
+    <string name="nompiece">NomPiece</string>
 </resources>

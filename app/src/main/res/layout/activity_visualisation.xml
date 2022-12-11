@@ -8,6 +8,13 @@
         android:layout_height="match_parent"
         tools:context=".VisualisationActivity">
 
+    <TextView
+            android:text="@string/nompiece"
+            android:layout_width="168dp"
+            android:layout_height="43dp" android:id="@+id/textView"
+            android:textSize="34sp" android:textColor="#18FFFF" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="68dp"/>
     <ImageView
             android:layout_width="298dp"
             android:layout_height="288dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"

@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class VisualisationActivity extends AppCompatActivity {
 
     private ImageView img;
     private int orientation;
+    private TextView textNom;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -34,6 +36,7 @@ public class VisualisationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_visualisation);
         i = 0;
         img = findViewById(R.id.imageView);
+        textNom = findViewById(R.id.textView);
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
@@ -45,6 +48,7 @@ public class VisualisationActivity extends AppCompatActivity {
                 orientation = 0;
             }
         }
+        textNom.setText(piece.getNom());
         afficheImage(orientation); //on affiche le mur nord de base
         img.setOnTouchListener(new View.OnTouchListener() {
             @Override
