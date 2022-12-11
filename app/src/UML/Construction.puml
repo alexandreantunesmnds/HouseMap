@@ -3,7 +3,16 @@
 class Batiment{
 String nomBat
 ajouterPiece(Piece piece)
-getNbPieces()
+mettreAJourPiece(Piece piece)
+retirerPiece(Piece piece)
+String getNomBat()
+int getNbPieces()
+Piece getPiece(int index)
+List<Piece> getListPieces()
+Boolean pieceIsInBat(String nomPiece)
+Piece getPiece(String nomPiece)
+Piece getPiece2(String nom)
+supprimerTout()
 }
 class Monde{
 ajouterBatiment()
@@ -11,20 +20,38 @@ getBatiment()
 }
 
 class Piece {
-String nomPiece
-int noPiece
-int nbSorties
-Piece [] zonesSorties
-getZonesSorties()
+String nom;
+int noPiece;
+Mur [] tabMur = new Mur[4];
+Mur getMur(int i)
+String getNom()
+ajouterMur(Mur mur)
+modifierMur(Mur mur)
+setNom(String nom)
+setNoPiece(int noPiece)
 }
 class Sortie{
+Piece piece
 int noSortie
-Rect zoneSortie
+int x
+int y
+int x2
+int y2
+Rect rect
+String getNomPiece()
+int getNoSortie()
+Rect getRect()
 }
 
 class Mur {
 int noMur
-ImageView photo
+String nomPhoto
+int getNoMur()
+String getNomPhoto()
+Sortie getSortie(int index)
+setPhoto(String nomPhoto)
+ajouterSortie(Sortie sortie)
+supprimerPorte(Sortie porte)
 }
 'class MainActivity{
 'Button Construction
