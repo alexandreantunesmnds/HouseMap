@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.charge_menu:
                 maison = save.getProject("appart",this);
             case R.id.supprime_menu:
-                save.deleteProjet(getDir("appart.ser",MODE_PRIVATE),"appart");
+                save.deleteProjet(this.getFilesDir(),"appart");
                 maison.supprimerTout();
             default:
                 return super.onOptionsItemSelected(item);
@@ -56,12 +56,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickVisu(View view) {
-        Intent intent = new Intent(MainActivity.this, ConsultPieceActivity.class) ;
-        Bundle extras = new Bundle();
-        extras.putSerializable("maison",maison);
-        extras.putSerializable("visualisation",1);
-        intent.putExtras(extras);
-        startActivity(intent);
+        if(maison.getNbPieces()>0) {
+            Intent intent = new Intent(MainActivity.this, ConsultPieceActivity.class);
+            Bundle extras = new Bundle();
+            extras.putSerializable("maison", maison);
+            extras.putSerializable("visualisation", 1);
+            intent.putExtras(extras);
+            startActivity(intent);
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

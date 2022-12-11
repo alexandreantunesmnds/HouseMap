@@ -108,11 +108,13 @@ public class AfficheMurActivity extends AppCompatActivity {
                 if (maison.pieceIsInBat(nomPiece)) { //si la piece existe deja
                     sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
                     mur.ajouterSortie(sortie);
+                    pieceEnCours.modifierMur(mur);
                     Toast.makeText(AfficheMurActivity.this, "La sortie est ajoutée ", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!String.valueOf(input.getText()).equals("")) {//si on a bien écrit quelque chose
                         nomPiece = String.valueOf(input.getText());
                         int numPiece = FabriqueNumero.getInstance().getNumeroPiece();
+                        Toast.makeText(AfficheMurActivity.this, "num piece =  "+numPiece, Toast.LENGTH_SHORT).show();
                         Piece piece = new Piece(nomPiece, numPiece);
                         maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
                         sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);

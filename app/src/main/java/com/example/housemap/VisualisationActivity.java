@@ -25,6 +25,7 @@ public class VisualisationActivity extends AppCompatActivity {
     private int i;
 
     private ImageView img;
+    private int orientation;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -36,37 +37,47 @@ public class VisualisationActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null) {
             piece = (Piece) getIntent().getSerializableExtra("piece");
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
+            if(getIntent().getSerializableExtra("orientation")!=null) {
+                orientation = (int) getIntent().getSerializableExtra("orientation");
+                Toast.makeText(this, "orientation vaut :"+orientation, Toast.LENGTH_SHORT).show();
+            }
+            else{
+                orientation = 0;
+            }
         }
-        afficheImage(0); //on affiche le mur nord de base
+        afficheImage(orientation); //on affiche le mur nord de base
         img.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 int x = (int) event.getX(); // récupérer la coordonnée x du clic
                 int y = (int) event.getY(); // récupérer la coordonnée y du clic
-                Mur mur = piece.getMur(0);
-                    if((mur.getListSorties().size())!=0){
-                        for(int i = 0;i<mur.getListSorties().size();i++){
-                            Toast.makeText(view.getContext(), "sortie:"+mur.getSortie(i).getNomPiece(), Toast.LENGTH_SHORT).show();
-                            Rect rect = mur.getSortie(i).getRect();
-                            if(rect != null) {
+                for(int j = 0;j<4;j++) {
+                    Mur mur = piece.getMur(j);
+                    if ((mur.getListSorties().size()) != 0) {
+                        for (int n = 0; n < mur.getListSorties().size(); n++) {
+                            Rect rect = mur.getSortie(n).getRect();
+                            if (rect != null) {
                                 if (rect.contains(x, y)) {
                                     // faire quelque chose si le clic se trouve à l'intérieur du Rect
-                                    Toast.makeText(view.getContext(), "Vous avez cliquer dans le Rect !!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(VisualisationActivity.this, VisualisationActivity.class);
-                                    Bundle extras2 = new Bundle();
-                                    extras2.putSerializable("maison",maison);
-                                    extras2.putSerializable("piece",maison.getPiece(mur.getSortie(i).getNomPiece()));
-                                    intent.putExtras(extras2);
-                                    finish();
-                                    startActivity(intent);
+                                    if(maison.getPiece(mur.getSortie(n).getNomPiece()).getMur(j)!=null) {
+                                        Intent intent = new Intent(VisualisationActivity.this, VisualisationActivity.class);
+                                        Bundle extras2 = new Bundle();
+                                        extras2.putSerializable("maison", maison);
+                                        extras2.putSerializable("orientation", i);
+                                        Toast.makeText(view.getContext(), "i vaut :"+i, Toast.LENGTH_SHORT).show();
+                                        extras2.putSerializable("piece", maison.getPiece(mur.getSortie(n).getNomPiece()));
+                                        intent.putExtras(extras2);
+                                        finish();
+                                        startActivity(intent);
+                                    }
                                 } else {
                                     // faire quelque chose si le clic se trouve à l'extérieur du Rect
                                     //Toast.makeText(this, "Vous avez cliquer hors Rect !!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
-
                     }
+                }
 
                 return false;
             }

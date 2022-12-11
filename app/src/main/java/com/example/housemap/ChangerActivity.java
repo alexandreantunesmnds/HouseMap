@@ -143,9 +143,7 @@ public class ChangerActivity extends AppCompatActivity {
                 Piece piece = (Piece) data.getSerializableExtra("piece");
                 this.maison = maison;
                 this.piece = piece;
-                this.maison.mettreAJourPiece(piece);
-                Toast.makeText(ChangerActivity.this, "Voici votre nom de photo : "+ this.piece.getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
-            }
+                this.maison.mettreAJourPiece(piece);}
         }
     }
 

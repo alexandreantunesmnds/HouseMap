@@ -16,7 +16,11 @@ public class Batiment implements Serializable {
         listPieces.add(piece);
     }
     public void mettreAJourPiece(Piece piece){
-        listPieces.set(piece.getNoPiece(),piece);
+        for(int i = 0;i<listPieces.size();i++){
+            if(Objects.equals(listPieces.get(i).getNom(), piece.getNom())){
+                listPieces.set(i,piece);
+            }
+        }
     }
 
     public void retirerPiece(Piece piece){
@@ -53,6 +57,14 @@ public class Batiment implements Serializable {
         for (Piece listPiece : listPieces) {
             if (Objects.equals(listPiece.getNom(), nomPiece)) {
                 return listPiece;
+            }
+        }
+        return null;
+    }
+    public Piece getPiece2(String nom){
+        for(int i = 0;i<listPieces.size();i++){
+            if(listPieces.get(i).getNom()==nom){
+                return listPieces.get(i);
             }
         }
         return null;

@@ -12,8 +12,6 @@ public class FabriqueNumero implements Serializable {
          * Constructeur
          */
         private FabriqueNumero(){
-            this.cptPiece = 0;
-            this.cptSortie = 0;
         }
 
         /**

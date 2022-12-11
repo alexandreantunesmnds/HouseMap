@@ -53,6 +53,7 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
         if(visualisation==0) {
             Intent intent = new Intent(this, ChangerActivity.class);
             Piece pieceChoisie = pieceList.get(position);
+            Toast.makeText(this, "Voici votre num de piece: "+ pieceChoisie.getNoPiece(), Toast.LENGTH_SHORT).show();
             intent.putExtra("maison", maison);
             intent.putExtra("piece", pieceChoisie);
             startActivityForResult(intent, 10);
