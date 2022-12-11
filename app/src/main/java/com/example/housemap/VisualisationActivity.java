@@ -55,15 +55,14 @@ public class VisualisationActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent event) {
                 int x = (int) event.getX(); // récupérer la coordonnée x du clic
                 int y = (int) event.getY(); // récupérer la coordonnée y du clic
-                for(int j = 0;j<4;j++) {
-                    Mur mur = piece.getMur(j);
+                    Mur mur = piece.getMur(i);
                     if ((mur.getListSorties().size()) != 0) {
                         for (int n = 0; n < mur.getListSorties().size(); n++) {
                             Rect rect = mur.getSortie(n).getRect();
                             if (rect != null) {
                                 if (rect.contains(x, y)) {
                                     // faire quelque chose si le clic se trouve à l'intérieur du Rect
-                                    if(maison.getPiece(mur.getSortie(n).getNomPiece()).getMur(j)!=null) {
+                                    if(maison.getPiece(mur.getSortie(n).getNomPiece()).getMur(i)!=null) {
                                         Intent intent = new Intent(VisualisationActivity.this, VisualisationActivity.class);
                                         Bundle extras2 = new Bundle();
                                         extras2.putSerializable("maison", maison);
@@ -81,7 +80,6 @@ public class VisualisationActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }
 
                 return false;
             }
