@@ -146,7 +146,7 @@ public class AfficheMurActivity extends AppCompatActivity {
             int hauteur = (int) ((((rect.bottom - img.getY())) - (rect.top - img.getY())));
             int largeur = (int) ((((rect.right - img.getX())) - (rect.left - img.getX())));
 
-            if (y + hauteur < redimension.getHeight()) {
+            if (y + hauteur < redimension.getHeight()&&y>=0) {
                 Bitmap rog = Bitmap.createBitmap(redimension, x, y, largeur, hauteur);
 
                 ImageView rogView = new ImageView(this); //image récupéréé de la sortie

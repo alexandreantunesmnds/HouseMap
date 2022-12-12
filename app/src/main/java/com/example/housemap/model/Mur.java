@@ -1,5 +1,7 @@
 package com.example.housemap.model;
 
+import android.widget.ImageView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +10,21 @@ public class Mur implements Serializable {
     private int noMur;
     private String nomPhoto;
     private List<Sortie> listSorties;
+    private ImageView img;
     public Mur() {
         noMur = 0;
     }
 
-    public Mur(int noMur, String nomPhoto) {
+    public Mur(int noMur, String nomPhoto,ImageView img) {
         this.noMur = noMur;
         this.nomPhoto = nomPhoto;
         listSorties = new ArrayList<>(10);
+        this.img=img;
+    }
+
+    public Mur(int nbPrises, String nameFile) {
+        this.noMur = nbPrises;
+        this.nomPhoto = nameFile;
     }
 
     public int getNoPiece() {

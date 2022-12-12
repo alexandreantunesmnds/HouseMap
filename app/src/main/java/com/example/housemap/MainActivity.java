@@ -1,5 +1,6 @@
 package com.example.housemap;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.charger:
                 maison = save.getProject("appart",this);
+                Toast.makeText(this, "Vous avez chargé le projet ", Toast.LENGTH_SHORT).show();
             case R.id.quitter:
                 finish();
             case R.id.supprime_menu:
                 if(maison!=null){
                     save.deleteProjet(this.getFilesDir(), "appart");
                     maison.supprimerTout();
+                    Toast.makeText(this, "Vous avez détruit le batiment ", Toast.LENGTH_SHORT).show();
                 }
             default:
                 return super.onOptionsItemSelected(item);
