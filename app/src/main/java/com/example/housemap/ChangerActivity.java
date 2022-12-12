@@ -50,9 +50,7 @@ public class ChangerActivity extends AppCompatActivity {
     public void clickValiderNom(View view) {
         if(!(nomPiece.getText().toString().equals(""))&&!maison.pieceIsInBat(nomPiece.getText().toString())){//si on a écrit quelque chose et si pièce pas dans le batiment
             nomPieceS = nomPiece.getText().toString();
-            piece.setNom(nomPieceS);
-            maison.mettreAJourPiece(piece);
-            Toast.makeText(ChangerActivity.this, "Nom de la pièce modifié avec succès", Toast.LENGTH_SHORT).show();
+            maison.changerNom(piece,nomPieceS);
             Button valider = findViewById(R.id.buttonValide);
             valider.setEnabled(false);
             valider.setVisibility(View.INVISIBLE);

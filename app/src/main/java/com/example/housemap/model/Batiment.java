@@ -22,6 +22,13 @@ public class Batiment implements Serializable {
             }
         }
     }
+    public void changerNom(Piece piece,String nomNouveau){
+        for(int i = 0;i<listPieces.size();i++){
+            if(Objects.equals(listPieces.get(i).getNom(), piece.getNom())){
+                listPieces.get(i).setNom(nomNouveau);
+            }
+        }
+    }
 
     public void retirerPiece(Piece piece){
         for(int i =0;i<listPieces.size();i++){
