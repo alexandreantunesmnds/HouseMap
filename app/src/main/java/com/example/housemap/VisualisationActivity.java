@@ -41,7 +41,6 @@ public class VisualisationActivity extends AppCompatActivity {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
             if(getIntent().getSerializableExtra("orientation")!=null) {
                 orientation = (int) getIntent().getSerializableExtra("orientation");
-                Toast.makeText(this, "orientation vaut :"+orientation, Toast.LENGTH_SHORT).show();
             }
             else{
                 orientation = 0;
@@ -66,15 +65,14 @@ public class VisualisationActivity extends AppCompatActivity {
                                         Bundle extras2 = new Bundle();
                                         extras2.putSerializable("maison", maison);
                                         extras2.putSerializable("orientation", i);
-                                        Toast.makeText(view.getContext(), "i vaut :"+i, Toast.LENGTH_SHORT).show();
                                         extras2.putSerializable("piece", maison.getPiece(mur.getSortie(n).getNomPiece()));
                                         intent.putExtras(extras2);
                                         finish();
                                         startActivity(intent);
                                     }
-                                } else {
-                                    // faire quelque chose si le clic se trouve à l'extérieur du Rect
-                                    //Toast.makeText(this, "Vous avez cliquer hors Rect !!", Toast.LENGTH_SHORT).show();
+                                    else{
+                                        Toast.makeText(view.getContext(), "Vous n'avez pas initialisé la pièce, veuillez prendre les photos", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         }
@@ -85,6 +83,7 @@ public class VisualisationActivity extends AppCompatActivity {
         });
     }
     public void afficheImage (int i){
+        if(piece.getMur(0).getNomPhoto()!=null) {
             String nameFile = piece.getMur(i).getNomPhoto();
             FileInputStream fis;
             try {
@@ -92,11 +91,11 @@ public class VisualisationActivity extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        bm = Bitmap.createScaledBitmap(bm, 1000, 1000, false);
-        // Reste à mettre bm à mettre sur l’ImageView
-        img.setImageBitmap(bm);
-
+            Bitmap bm = BitmapFactory.decodeStream(fis);
+            bm = Bitmap.createScaledBitmap(bm, 1000, 1000, false);
+            // Reste à mettre bm à mettre sur l’ImageView
+            img.setImageBitmap(bm);
+        }
 
     }
 
@@ -109,7 +108,6 @@ public class VisualisationActivity extends AppCompatActivity {
             i=0;
             afficheImage(i);
         }
-        Toast.makeText(view.getContext(), "i vaut "+ i, Toast.LENGTH_SHORT).show();
     }
 
     public void clickPrec(View view) {//a revoir cette fonction
@@ -121,8 +119,6 @@ public class VisualisationActivity extends AppCompatActivity {
         else{
             afficheImage(i);
         }
-        Toast.makeText(view.getContext(), "i vaut "+ i, Toast.LENGTH_SHORT).show();
-
 
     }
 

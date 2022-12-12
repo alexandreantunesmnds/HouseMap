@@ -53,7 +53,6 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
         if(visualisation==0) {
             Intent intent = new Intent(this, ChangerActivity.class);
             Piece pieceChoisie = pieceList.get(position);
-            Toast.makeText(this, "Voici votre num de piece: "+ pieceChoisie.getNoPiece(), Toast.LENGTH_SHORT).show();
             intent.putExtra("maison", maison);
             intent.putExtra("piece", pieceChoisie);
             startActivityForResult(intent, 10);
@@ -73,7 +72,6 @@ public class ConsultPieceActivity extends AppCompatActivity implements RecyclerV
         // check that it is the SecondActivity with an OK result
         if (requestCode == 10) {
             if (resultCode == RESULT_OK) {
-                //Toast.makeText(ConsultPieceActvity.this, "nb pieces : "+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
                 maison = (Batiment) data.getSerializableExtra("maison");
                 pieceList = maison.getListPieces();
                 adapter = new PieceAdapter(this,pieceList,this);

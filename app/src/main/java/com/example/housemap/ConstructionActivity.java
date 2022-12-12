@@ -21,9 +21,6 @@ public class ConstructionActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null) {
             maison = (Batiment) getIntent().getSerializableExtra("maison"); //on récupère le batiment créer
         }
-        for(int i = 0;i<maison.getNbPieces();i++){
-            Toast.makeText(ConstructionActivity.this, "La pièce est :"+maison.getPiece(i).getNom(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     @SuppressLint("QueryPermissionsNeeded")

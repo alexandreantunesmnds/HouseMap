@@ -62,31 +62,6 @@ public class Sauvegarde {
         return maison;
     }
 
-    public List<String> recupererBatiment(File repertoire){
-        List<String> listeBat = new ArrayList<String>();
-        for(File fichier : repertoire.listFiles()){
-            if(!fichier.isDirectory()){
-                if(fichier.getName().contains(".ser")){
-                    listeBat.add(fichier.getName().substring(0,fichier.getName().length()-4));
-                }
-            }
-        }
-        return listeBat;
-    }
-
-
-    public void afficherFichiersSauvegarde(File repertoire){
-        StringBuilder build = new StringBuilder();
-        for(File fichier : repertoire.listFiles()){
-            if(!fichier.isDirectory()){
-                build.append(fichier.getName()+", ");
-            }else{
-                build.append(fichier.getName()+"/, ");
-            }
-        }
-        Log.i("Fichiers sauvegardés : ",build.toString());
-    }
-
     public void deleteProjet(File repertoire, String nomProjet){
         for(File fichier : repertoire.listFiles()){
             if(!fichier.isDirectory()){
