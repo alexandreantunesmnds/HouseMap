@@ -41,6 +41,7 @@ public class ChangerActivity extends AppCompatActivity {
     public void clickSupprimer(View view) {
         Intent intent = new Intent(ChangerActivity.this, ConsultPieceActivity.class);
         maison.retirerPiece(piece);
+        //maison.decreaseNumPiece();
         Toast.makeText(ChangerActivity.this, "nb pieces : "+maison.getNbPieces(), Toast.LENGTH_SHORT).show();
         intent.putExtra("maison",maison);
         setResult(RESULT_OK, intent);

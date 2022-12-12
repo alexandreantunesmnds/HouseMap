@@ -18,7 +18,6 @@ import com.example.housemap.model.Piece;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 public class VisualisationActivity extends AppCompatActivity {
     private Piece piece;
@@ -93,10 +92,11 @@ public class VisualisationActivity extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            Bitmap bm = BitmapFactory.decodeStream(fis);
-            bm = Bitmap.createScaledBitmap(bm, 1000, 1000, false);
-            // Reste à mettre bm à mettre sur l’ImageView
-            img.setImageBitmap(bm);
+        Bitmap bm = BitmapFactory.decodeStream(fis);
+        bm = Bitmap.createScaledBitmap(bm, 1000, 1000, false);
+        // Reste à mettre bm à mettre sur l’ImageView
+        img.setImageBitmap(bm);
+
 
     }
 

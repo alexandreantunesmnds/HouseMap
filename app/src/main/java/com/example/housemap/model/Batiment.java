@@ -72,4 +72,9 @@ public class Batiment implements Serializable {
     public void supprimerTout(){
         this.listPieces.clear();
     }
+    public void decreaseNumPiece(){
+        for (Piece listPiece : listPieces) {
+            listPiece.decreaseNumeroPiece();
+        }
+    }
 }

@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         save = Sauvegarde.getInstance();
-        if(save.getProject("appart",this)!=null) {
-            maison = save.getProject("appart", this);
-        }
-        else{
+        maison = save.getProject("appart", this);
+        if(maison==null) {
             maison = new Batiment();
         }
     }
@@ -35,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.sauv_menu:
-                save.saveProject(maison,this);
-            case R.id.charge_menu:
+            case R.id.charger:
                 maison = save.getProject("appart",this);
+            case R.id.quitter:
+                finish();
             case R.id.supprime_menu:
-                save.deleteProjet(this.getFilesDir(),"appart");
-                maison.supprimerTout();
+                if(maison!=null){
+                    save.deleteProjet(this.getFilesDir(), "appart");
+                    maison.supprimerTout();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -31,4 +31,7 @@
     <string name="suivant">Suivant</string>
     <string name="pr_c_dent">Précédent</string>
     <string name="nompiece">NomPiece</string>
+    <string name="d_truire_toute_la_maison">Détruire toute la maison</string>
+    <string name="quitter_l_application">Quitter l\'application</string>
+    <string name="reprendre_la_maison_pr_c_dente">Reprendre la maison précédente</string>
 </resources>

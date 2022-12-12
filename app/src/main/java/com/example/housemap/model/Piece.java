@@ -52,4 +52,7 @@ public class Piece implements Serializable {
     public void setTabMur(Mur[] tabMur) {
         this.tabMur = tabMur;
     }
+    public void decreaseNumeroPiece(){
+        this.noPiece--;
+    }
 }
