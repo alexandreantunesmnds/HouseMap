@@ -25,6 +25,7 @@ public class Mur implements Serializable {
     public Mur(int nbPrises, String nameFile) {
         this.noMur = nbPrises;
         this.nomPhoto = nameFile;
+        listSorties = new ArrayList<>(10);
     }
 
     public int getNoPiece() {

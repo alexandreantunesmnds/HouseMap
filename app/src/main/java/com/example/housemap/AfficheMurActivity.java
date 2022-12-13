@@ -120,7 +120,7 @@ public class AfficheMurActivity extends AppCompatActivity {
                         Toast.makeText(AfficheMurActivity.this, "num piece =  "+numPiece, Toast.LENGTH_SHORT).show();
                         Piece piece = new Piece(nomPiece, numPiece);
                         maison.ajouterPiece(piece); //on ajoute la pièce au modèle si elle n'existe pas encore
-                        sortie = new Sortie(maison.getPiece(nomPiece), numSortie, x, y, x2, y2);
+                        sortie = new Sortie(piece, numSortie, x, y, x2, y2);
                         mur.ajouterSortie(sortie);
                         pieceEnCours.modifierMur(mur);
                         maison.mettreAJourPiece(pieceEnCours);

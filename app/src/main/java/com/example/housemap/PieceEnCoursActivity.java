@@ -169,7 +169,6 @@ public class PieceEnCoursActivity extends AppCompatActivity {
                 ajout.setVisibility(View.INVISIBLE); //on fait disparaître le bouton si les 4photos sont prises
                 valider.setBackgroundColor(Color.parseColor("#7CB342"));
                 ajoutPorte.setBackgroundColor(Color.parseColor("#CCFF90"));
-                Toast.makeText(PieceEnCoursActivity.this, "Voici votre nom de photo : "+ this.piece.getMur(0).getNomPhoto(), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(PieceEnCoursActivity.this, "Vous pouvez désormais ajouter des portes à la pièce ou valider la pièce", Toast.LENGTH_SHORT).show();
             }
         }
